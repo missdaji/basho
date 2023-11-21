@@ -10,9 +10,15 @@ class PinsController < ApplicationController
     authorize @pin
   end
 
+  def new
+    @pin = Pin.new
+    authorize @pin
+  end
+  
   def create
     @pin = Pin.new(pin_params)
     @pin.user = current_user
+    authorize @pin
     if @pin.save
       redirect_to pin_path(@pin)
     else
@@ -23,6 +29,6 @@ class PinsController < ApplicationController
   private
 
   def pin_params
-    params.require(:pin).permit(:name, :address, :longitude, :latitude, :comments, :icon, :rating, :visited, :picture_url)
+    params.require(:pin).permit(:photo, :name, :address, :longitude, :latitude, :comments, :icon, :rating, :visited, :private)
   end
 end

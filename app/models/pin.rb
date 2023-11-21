@@ -1,6 +1,7 @@
 class Pin < ApplicationRecord
   belongs_to :user
   has_one_attached :photo
+
   after_initialize :set_default, if: :new_record?
 
   validates :name, presence: true
@@ -14,4 +15,5 @@ class Pin < ApplicationRecord
     self.visited ||= false
     self.private ||= false
   end
+
 end
