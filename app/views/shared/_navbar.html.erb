@@ -1,13 +1,16 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon fixed-top">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "basho-logo-4.png" %>
+  <%# LOGO %>
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "basho-logo.png" %>
     <% end %>
+  <%# LOGO END %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+  <%# USER AREA %>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
@@ -34,6 +37,7 @@
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
+  <%# USER AREA END %>
       </ul>
     </div>
   </div>
