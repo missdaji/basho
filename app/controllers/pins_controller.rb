@@ -1,9 +1,20 @@
 class PinsController < ApplicationController
+
+  def index
+    @pins = Pin.all
+    @pins = policy_scope(Pin)
+  end
+
+  def show
+    @pin = Pin.find(params[:id])
+    authorize @pin
+  end
+
   def new
     @pin = Pin.new
     authorize @pin
   end
-
+  
   def create
     @pin = Pin.new(pin_params)
     @pin.user = current_user

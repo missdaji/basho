@@ -10,4 +10,14 @@ class PinsControllerTest < ActionDispatch::IntegrationTest
     get pins_create_url
     assert_response :success
   end
+
+  test "should get index" do
+    get pins_index_url
+    assert_response :success
+  end
+
+  # test "the truth" do
+  #   assert true
+  # end
+
 end
