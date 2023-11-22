@@ -12,6 +12,33 @@
     <main class="p-4">
       <h2>My Pins</h2>
       <div class="row justify-content-center">
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Search by name or comment" %>
+          <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      <div class="row justify-content-center">
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= hidden_field_tag(:sortbyname, 1) %>
+          <%= submit_tag "Sort by name", name: "", class: "btn btn-primary" %>
+        <% end %>
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= hidden_field_tag(:sortbydate, 1) %>
+          <%= submit_tag "Sort by date", name: "", class: "btn btn-primary" %>
+        <% end %>
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= hidden_field_tag(:visited, 1) %>
+          <%= submit_tag "Visited", name: "", class: "btn btn-primary" %>
+        <% end %>
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= hidden_field_tag(:notyetvisited, 1) %>
+          <%= submit_tag "Not visited", name: "", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      <div class="row justify-content-center">
         <% @pins.each do |pin| %>
         <div class="col-lg-auto">
           <div class="col-12 col-md-6 card mb-9 shadow my-2 p-0" >
