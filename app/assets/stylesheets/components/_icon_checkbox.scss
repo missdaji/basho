@@ -1,5 +1,4 @@
-// .icon_button {
-//   input { display: none }
-//   i { color: red }
-//   &:not(input:checked) i { color: black }
-// }
+.icon_checkbox {
+  input[type=radio] { display: none }
+  &:has(input:checked) { color: #ff3b6aff}
+}
