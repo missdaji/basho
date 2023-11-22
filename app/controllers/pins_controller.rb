@@ -3,6 +3,13 @@ class PinsController < ApplicationController
   def index
     @pins = Pin.all
     @pins = policy_scope(Pin)
+    # @markers = @pins.geocoded.map do |pin|
+    #   {
+    #     lat: pin.latitude,
+    #     lng: pin.longitude
+    #   }
+    # end
+    @markers = []
   end
 
   def show
@@ -14,7 +21,7 @@ class PinsController < ApplicationController
     @pin = Pin.new
     authorize @pin
   end
-  
+
   def create
     @pin = Pin.new(pin_params)
     @pin.user = current_user
