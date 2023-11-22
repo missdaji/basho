@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'pins/index'
+  get '/tagged', to: "pins#tagged", as: :tagged
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -8,7 +9,14 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :pins, only: [ :show, :index, :new, :create ]
+  resources :pins, only: [ :show, :index, :new, :create ] do
+    member do
+      patch :visit
+      patch :to_visit
+      patch :public
+      patch :private
+    end
+  end
 
   # Defines the root path route ("/")
   # root "posts#index"

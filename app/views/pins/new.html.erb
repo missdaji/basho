@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12 col-md-6 px-5 pb-3">
+  <div class="col-12 col-md-6 px-5 pb-1">
     <h1>New pin</h1>
   </div>
 </div>
@@ -29,6 +29,30 @@
           </label>
         <% end %>
         <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
+        <%= f.association :tags,
+                  as: :check_boxes,
+                  input_html: { class: "tag-selector" },
+                  item_wrapper_class: 'tag-item' %>
+        <%= f.input :tag_list, label: "Tags", hint: "Add your tags, separated by commas" %>
+        <div class="d-flex justify-content-between px-5 py-3">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-primary active">
+          <input type="radio" name="options" id="option1" autocomplete="off" checked> Done
+        </label>
+        <label class="btn btn-primary">
+          <input type="radio" name="options" id="option2" autocomplete="off"> To Do
+        </label>
+          </div>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-primary active">
+          <input type="radio" name="options" id="option3" autocomplete="off" checked> Public
+        </label>
+        <label class="btn btn-primary">
+          <input type="radio" name="options" id="option4" autocomplete="off"> Private
+        </label>
+          </div>
+        </div>
+        <br>
         <%= f.input :comments %>
         <%= f.input :photo, as: :file %>
         <%= f.submit "Save", class: "form-button" %>
