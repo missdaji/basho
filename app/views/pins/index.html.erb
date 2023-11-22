@@ -1,13 +1,13 @@
-<h1>Pins#index</h1>
-<p>Find me in app/views/pins/index.html.erb</p>
 
 
 <div>
   <main class="p-4">
+
+    <h2>My Pins</h2>
     <div class="row justify-content-center">
       <% @pins.each do |pin| %>
-        <div class="col-md-auto">
-          <div class="card mb-3 rounded shadow" style="width: 18rem;">
+        <div class="col-lg-auto">
+          <div class="card mb-9 shadow mx-auto my-2" style="width: 80%;">
             <div class="card-body">
               <h5 class="card-title"><%= pin.name %></h5>
               <p class="card-text"><%= pin.address %></p>
@@ -16,5 +16,21 @@
         </div>
         <% end %>
     </div>
+
+<%# TO DELETE!!!! ONLY TO TEST SCROLLING %>
+    <h2>To delete</h2>
+    <div class="row justify-content-center">
+      <% @pins.each do |pin| %>
+        <div class="col-lg-auto">
+          <div class="card mb-9 shadow mx-auto my-2" style="width: 80%;">
+            <div class="card-body">
+              <h5 class="card-title"><%= pin.name %></h5>
+              <p class="card-text"><%= pin.address %></p>
+            </div>
+          </div>
+        </div>
+        <% end %>
+    </div>
+<%# END OF: TO DELETE!!!! ONLY TO TEST SCROLLING %>
   </main>
 </div>

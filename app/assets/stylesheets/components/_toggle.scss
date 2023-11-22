@@ -1,0 +1,25 @@
+.btn-toggle {
+  padding: 3px 20px;
+  color: black;
+  z-index: 990;
+  text-decoration: none;
+}
+
+.btn-toggle-active {
+
+  padding: 3px 20px;
+  border-radius: 15px;
+  color: $baby-powder;
+  background-color: $persian-blue;
+  z-index: 1000;
+  text-decoration: none;
+  text-align: center;
+}
+
+.bg-gray {
+  background-color: lightgray;
+  width: 150px;
+  margin: 0 auto;
+  border-radius: 15px;
+  top: 80px;
+}

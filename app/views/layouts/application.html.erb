@@ -20,9 +20,16 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></scri
     <link href="sticky-footer-navbar.css" rel="stylesheet">
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
+  <body>
 
+    <%= render "shared/navbar" %>
+
+      <div class="d-flex justify-content-center bg-gray fixed-top">
+          <%= link_to "map", root_path, class: "btn btn-toggle" %>
+          <%= link_to "list", pins_index_path, class: "btn btn-toggle-active" %>
+      </div>
+
+  <%= render "shared/flashes" %>
     <%= yield %>
   </body>
 </html>
