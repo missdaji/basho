@@ -33,26 +33,15 @@
                   as: :check_boxes,
                   input_html: { class: "tag-selector" },
                   item_wrapper_class: 'tag-item' %>
-        <%= f.input :tag_list, label: "Tags", hint: "Add your tags, separated by commas" %>
-        <div class="d-flex justify-content-between px-5 py-3">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-primary active">
-          <input type="radio" name="options" id="option1" autocomplete="off" checked> Done
-        </label>
-        <label class="btn btn-primary">
-          <input type="radio" name="options" id="option2" autocomplete="off"> To Do
-        </label>
-          </div>
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-primary active">
-          <input type="radio" name="options" id="option3" autocomplete="off" checked> Public
-        </label>
-        <label class="btn btn-primary">
-          <input type="radio" name="options" id="option4" autocomplete="off"> Private
-        </label>
+        <%= f.input :tag_list, label: "Add your tags (separated by a coma)" %>
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-6 py-3">
+            <div class="d-flex justify-content-between">
+              <%= f.input :visited, as: :boolean, input_html: { class: "toggle" } %>
+              <%= f.input :private, as: :boolean, input_html: { class: "toggle" } %>
+            </div>
           </div>
         </div>
-        <br>
         <%= f.input :comments %>
         <%= f.input :photo, as: :file %>
         <%= f.submit "Save", class: "form-button" %>
