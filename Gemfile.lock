@@ -83,6 +83,8 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    acts-as-taggable-on (10.0.0)
+      activerecord (>= 6.1, < 7.2)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
     autoprefixer-rails (10.4.15.0)
@@ -137,6 +139,7 @@ GEM
     ffi (1.16.3)
     font-awesome-sass (6.4.2)
       sassc (~> 2.0)
+    geocoder (1.8.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     http-accept (1.7.0)
@@ -310,6 +313,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts-as-taggable-on
   autoprefixer-rails
   bootsnap
   bootstrap (~> 5.2)
@@ -320,6 +324,7 @@ DEPENDENCIES
   dotenv-rails
   error_highlight (>= 0.4.0)
   font-awesome-sass (~> 6.1)
+  geocoder
   importmap-rails
   jbuilder
   pg (~> 1.1)

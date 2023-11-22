@@ -1,4 +1,5 @@
 class Pin < ApplicationRecord
+  acts_as_taggable_on :tags
   belongs_to :user
   has_one_attached :photo
 
@@ -8,6 +9,9 @@ class Pin < ApplicationRecord
   validates :address, presence: true
   validates :visited, inclusion: [true, false]
   validates :private, inclusion: [true, false]
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 
   private
 
