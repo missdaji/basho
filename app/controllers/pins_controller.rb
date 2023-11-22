@@ -14,7 +14,7 @@ class PinsController < ApplicationController
     @pin = Pin.new
     authorize @pin
   end
-  
+
   def create
     @pin = Pin.new(pin_params)
     @pin.user = current_user

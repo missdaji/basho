@@ -9,6 +9,9 @@ class Pin < ApplicationRecord
   validates :visited, inclusion: [true, false]
   validates :private, inclusion: [true, false]
 
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
   private
 
   def set_default
