@@ -7,14 +7,21 @@
     <div class="row justify-content-center">
       <% @pins.each do |pin| %>
         <div class="col-lg-auto">
-          <div class="card mb-9 shadow mx-auto my-2" style="width: 80%;">
-            <div class="card-body">
-              <h5 class="card-title"><%= pin.name %></h5>
-              <p class="card-text"><%= pin.address %></p>
+          <div class="col-12 col-md-6 card mb-9 shadow my-2 p-0" >
+            <div class="card-product">
+              <% if pin.photo.attached? %>
+                <%= cl_image_tag pin.photo.key, crop: :fill %>
+              <% else %>
+                <%= image_tag "jouls.jpg", class: "", alt: "Card image cap", height: "60", crop: :fill %>
+                <% end %>
+              <div class="card-product-infos">
+                <h5 class="card-title"><%= pin.name %></h5>
+                <p class="card-text"><%= pin.address %></p>
+              </div>
             </div>
           </div>
         </div>
-        <% end %>
+      <% end %>
     </div>
 
 <%# TO DELETE!!!! ONLY TO TEST SCROLLING %>
