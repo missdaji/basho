@@ -3,6 +3,13 @@ class PinsController < ApplicationController
   def index
     @pins = Pin.all
     @pins = policy_scope(Pin)
+    # @markers = @pins.geocoded.map do |pin|
+    #   {
+    #     lat: pin.latitude,
+    #     lng: pin.longitude
+    #   }
+    # end
+    @markers = []
   end
 
   def show
