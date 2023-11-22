@@ -3,7 +3,7 @@
     <%= button_tag "map", class: "btn-toggle-active", data: {action: "click->toggle#showMap", toggle_target: "mapBtn"} %>
     <%= button_tag "list", class: "btn-toggle", data: {action: "click->toggle#showList", toggle_target: "listBtn"} %>
   </div>
-  <div style="width: 100%; height: 600px;"
+  <div style="width: 100%; height: 850px;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
@@ -11,6 +11,33 @@
   <div data-toggle-target="list" class="d-none">
     <main class="p-4">
       <h2>My Pins</h2>
+      <div class="row justify-content-center">
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Search by name or comment" %>
+          <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      <div class="row justify-content-center">
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= hidden_field_tag(:sortbyname, 1) %>
+          <%= submit_tag "Sort by name", name: "", class: "btn btn-primary" %>
+        <% end %>
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= hidden_field_tag(:sortbydate, 1) %>
+          <%= submit_tag "Sort by date", name: "", class: "btn btn-primary" %>
+        <% end %>
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= hidden_field_tag(:visited, 1) %>
+          <%= submit_tag "Visited", name: "", class: "btn btn-primary" %>
+        <% end %>
+        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+          <%= hidden_field_tag(:notyetvisited, 1) %>
+          <%= submit_tag "Not visited", name: "", class: "btn btn-primary" %>
+        <% end %>
+      </div>
       <div class="row justify-content-center">
         <% @pins.each do |pin| %>
         <div class="col-lg-auto">
