@@ -1,11 +1,18 @@
-
-
-<div>
-  <main class="p-4">
-
-    <h2>My Pins</h2>
-    <div class="row justify-content-center">
-      <% @pins.each do |pin| %>
+<div data-controller="toggle">
+  <div class="d-flex justify-content-center bg-gray fixed-top">
+    <%= button_tag "map", class: "btn-toggle-active", data: {action: "click->toggle#showMap", toggle_target: "mapBtn"} %>
+    <%= button_tag "list", class: "btn-toggle", data: {action: "click->toggle#showList", toggle_target: "listBtn"} %>
+  </div>
+  <div style="width: 100%; height: 600px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  data-toggle-target="map"></div>
+  <div data-toggle-target="list" class="d-none">
+    <main class="p-4">
+      <h2>My Pins</h2>
+      <div class="row justify-content-center">
+        <% @pins.each do |pin| %>
         <div class="col-lg-auto">
           <div class="col-12 col-md-6 card mb-9 shadow my-2 p-0" >
             <div class="card-product">
@@ -24,24 +31,9 @@
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-
-<%# TO DELETE!!!! ONLY TO TEST SCROLLING %>
-    <h2>To delete</h2>
-    <div class="row justify-content-center">
-      <% @pins.each do |pin| %>
-        <div class="col-lg-auto">
-          <div class="card mb-9 shadow mx-auto my-2" style="width: 80%;">
-            <div class="card-body">
-              <h5 class="card-title"><%= pin.name %></h5>
-              <p class="card-text"><%= pin.address %></p>
-            </div>
-          </div>
-        </div>
+         </div>
         <% end %>
-    </div>
-<%# END OF: TO DELETE!!!! ONLY TO TEST SCROLLING %>
-  </main>
+      </div>
+    </main>
+  </div>
 </div>
