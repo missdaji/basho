@@ -2,16 +2,17 @@ class PinsController < ApplicationController
   def index
     @pins = Pin.all
     @pins = policy_scope(Pin)
+    @filters_list = %i[view query sort_by visited]
     if params[:query].present?
       sql_subquery = "name ILIKE :query OR comments ILIKE :query"
       @pins = @pins.where(sql_subquery, query: "%#{params[:query]}%")
-    elsif params[:sortbyname].present?
+    elsif params[:sort_by] == 'name'
       @pins = @pins.order(:name)
-    elsif params[:sortbydate].present?
+    elsif params[:sort_by] == 'date'
       @pins = @pins.order(created_at: :desc)
-    elsif params[:visited].present?
+    elsif params[:visited] == '1'
       @pins = @pins.where(visited: true)
-    elsif params[:notyetvisited].present?
+    elsif params[:visited] == '0'
       @pins = @pins.where(visited: false)
     end
     @markers = @pins.geocoded.map do |pin|
