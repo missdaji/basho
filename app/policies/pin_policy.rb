@@ -18,4 +18,22 @@ class PinPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def visit?
+    record.user == user
+  end
+
+  def to_visit?
+    record.user == user
+  end
+
+  def public?
+    record.user == user
+  end
+
+  def private?
+    record.user == user
+  end
+
+
 end

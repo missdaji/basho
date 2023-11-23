@@ -5,51 +5,27 @@
       <br>
       <h4><%= @pin.address %></h4>
       <br>
-      <p>Tags :</p>
-      <br>
-      <a href="..." class="btn btn-primary btn-block">Create Tag</a>
+      <%= simple_form_for(@pin) do |f| %>
+      <%= f.association :tags,
+                  as: :check_boxes,
+                  input_html: { class: "tag-selector" },
+                  item_wrapper_class: 'tag-item' %>
     </div>
   </div>
-  <br>
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6 mb-3">
       <p>Rating : <%= @pin.rating %>/5</p>
-    </div>
-  </div>
-  <br>
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-6">
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-primary active">
-      <input type="radio" name="options" id="option1" autocomplete="off" checked> Done
-    </label>
-    <label class="btn btn-primary">
-      <input type="radio" name="options" id="option2" autocomplete="off"> To Do
-    </label>
+      <p>Comments : <%= @pin.comments %></p>
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-6 py-3">
+          <div class="d-flex justify-content-between">
+            <%= f.input :visited, as: :boolean, input_html: { class: "toggle" } %>
+            <%= f.input :private, as: :boolean, input_html: { class: "toggle" } %>
+          </div>
+        </div>
+      <%= f.submit "Save", class: "form-button" %>
+      <% end %>
       </div>
-     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-primary active">
-      <input type="radio" name="options" id="option3" autocomplete="off" checked> Public
-    </label>
-    <label class="btn btn-primary">
-      <input type="radio" name="options" id="option4" autocomplete="off"> Private
-    </label>
-      </div>
-    </div>
-    </div>
-    <div class="row justify-content-center">
-    <div class="col-12 col-lg-6">
-    <form>
-      <div class="form-group">
-      <label for="exampleFormControlTextarea1"></label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Add your comments here..."></textarea>
-      </div>
-    </form>
-    </div>
-    </div>
-    <div class="row justify-content-center">
-    <div class="col-12 col-lg-6">
-    <a href="..." class="btn btn-primary btn-block">Save</a>
     </div>
   </div>
 </div>
