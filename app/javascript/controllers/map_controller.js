@@ -16,7 +16,7 @@ export default class extends Controller {
       center: [139.77, 35.68],
       zoom: 10
     });
-
+    
     this.map.addControl(
       new mapboxgl.GeolocateControl({
       positionOptions: {
@@ -27,6 +27,16 @@ export default class extends Controller {
       // Draw an arrow next to the location dot to indicate which direction the device is heading.
       showUserHeading: true
       })
-    );
+    this.#addMarkersToMap()
+  }
+
+  #addMarkersToMap() {
+    this.markersValue.forEach((marker) => {
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
+      new mapboxgl.Marker(customMarker)
+      .setLngLat([ marker.lng, marker.lat ])
+      .addTo(this.map)
+    })
   }
 }

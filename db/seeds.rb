@@ -75,7 +75,7 @@ pin.photo.attach(io: file, filename: "pizza_giardino.jpg", content_type: "image/
 pin.save
 
 file = URI.open("https://i.gyazo.com/9676820b3bcb004f5ddf22fdbb1cda5f.jpg")
-pin = Pin.create!(name: "Joint", address: "〒153-0063 Tokyo, Meguro City, Meguro, 3 Chome−11−6 リヨンドール目黒 １F", latitude: 35.63213092239773, longitude: 139.7064098558187, comments: "Good burger", icon: "", rating: 4.2, visited: true, private: false, user: user)
+pin = Pin.create!(name: "Joint", address: "〒153-0063 Tokyo, Meguro City, Meguro, 3 Chome−11−6 リヨンドール目黒 １F", latitude: 35.63213092239773, longitude: 139.7064098558187, comments: "Good burger", icon: "fa-solid fa-burger", rating: 4.2, visited: true, private: false, user: user)
 pin.photo.attach(io: file, filename: "joint.jpg", content_type: "image/jpg")
 pin.save
 # =============================

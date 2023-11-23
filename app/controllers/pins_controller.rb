@@ -14,13 +14,13 @@ class PinsController < ApplicationController
     elsif params[:notyetvisited].present?
       @pins = @pins.where(visited: false)
     end
-    # @markers = @pins.geocoded.map do |pin|
-    #   {
-    #     lat: pin.latitude,
-    #     lng: pin.longitude
-    #   }
-    # end
-    @markers = []
+    @markers = @pins.geocoded.map do |pin|
+      {
+        lat: pin.latitude,
+        lng: pin.longitude,
+        marker_html: render_to_string(partial: "marker", locals: {pin: pin}) # , locals: {pin: pin}
+      }
+    end
   end
 
   def show
