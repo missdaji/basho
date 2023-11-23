@@ -1,0 +1,10 @@
+.marker {
+  background-image: asset-url("blue_marker.png");
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FF3B6A;
+}
