@@ -3,15 +3,12 @@
     <%= button_tag "map", class: "btn-toggle-active", data: {action: "click->toggle#showMap", toggle_target: "mapBtn"} %>
     <%= button_tag "list", class: "btn-toggle", data: {action: "click->toggle#showList", toggle_target: "listBtn"} %>
   </div>
-  <div style="width: 100%; height: 850px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-  data-toggle-target="map"></div>
-  <div data-toggle-target="list" class="d-none">
-    <main class="p-4">
-      <h2>My Pins</h2>
-      <div class="row justify-content-center">
+  <div data-controller="filters">
+    <div class="btn-filters" data-action="click->filters#showFilters">
+      <i class="fa-solid fa-filter" style="color: #ffffff;"></i>
+    </div>
+    <div class="d-none" data-filters-target="filtersCard">
+      <div class="px-4 pt-2">
         <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
           <%= text_field_tag :query,
             params[:query],
@@ -19,42 +16,61 @@
             placeholder: "Search by name or comment" %>
           <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
         <% end %>
+        <div class="d-flex justify-content-center pt-2 gap-2">
+          <div>
+            <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+              <%= hidden_field_tag(:visited, 1) %>
+              <%= submit_tag "Visited", name: "", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+          <div>
+            <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+              <%= hidden_field_tag(:notyetvisited, 1) %>
+              <%= submit_tag "Not visited", name: "", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
       </div>
-      <div class="row justify-content-center">
-        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
-          <%= hidden_field_tag(:sortbyname, 1) %>
-          <%= submit_tag "Sort by name", name: "", class: "btn btn-primary" %>
-        <% end %>
-        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
-          <%= hidden_field_tag(:sortbydate, 1) %>
-          <%= submit_tag "Sort by date", name: "", class: "btn btn-primary" %>
-        <% end %>
-        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
-          <%= hidden_field_tag(:visited, 1) %>
-          <%= submit_tag "Visited", name: "", class: "btn btn-primary" %>
-        <% end %>
-        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
-          <%= hidden_field_tag(:notyetvisited, 1) %>
-          <%= submit_tag "Not visited", name: "", class: "btn btn-primary" %>
-        <% end %>
+    </div>
+  </div>
+  <div style="width: 100%; height: 850px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  data-toggle-target="map"></div>
+  <div data-toggle-target="list" class="d-none">
+    <main class="px-4">
+      <div class="d-flex justify-content-center pt-2 gap-2">
+        <div>
+          <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+            <%= hidden_field_tag(:sortbyname, 1) %>
+            <%= submit_tag "Sort by name", name: "", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+        <div>
+          <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
+            <%= hidden_field_tag(:sortbydate, 1) %>
+            <%= submit_tag "Sort by date", name: "", class: "btn btn-primary" %>
+          <% end %>
+        </div>
       </div>
       <div class="row justify-content-center">
         <% @pins.each do |pin| %>
-        <div class="col-lg-auto">
-          <div class="col-12 col-md-6 card mb-9 shadow my-2 p-0" >
-            <div class="card-product">
-              <% if pin.photo.attached? %>
-                <%= cl_image_tag pin.photo.key, crop: :fill %>
-              <% else %>
-                <%= image_tag "jouls.jpg", class: "", alt: "Card image cap", height: "60", crop: :fill %>
-              <% end %>
-              <div class="card-product-infos">
-                <h5 class="card-title"><%= pin.name %></h5>
-                <p class="card-text"><%= pin.address %></p>
+          <div class="col-lg-auto">
+            <div class="col-12 col-md-6 card mb-9 shadow my-2 p-0" >
+              <div class="card-product">
+                <% if pin.photo.attached? %>
+                  <%= cl_image_tag pin.photo.key, crop: :fill %>
+                <% else %>
+                  <%= image_tag "jouls.jpg", class: "", alt: "Card image cap", height: "60", crop: :fill %>
+                <% end %>
+                <div class="card-product-infos">
+                  <h5 class="card-title"><%= pin.name %></h5>
+                  <p class="card-text"><%= pin.address %></p>
+                </div>
               </div>
             </div>
           </div>
-         </div>
         <% end %>
       </div>
     </main>
