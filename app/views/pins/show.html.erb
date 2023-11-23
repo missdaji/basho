@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
+      <img src=<%= @pin.photo %> alt="">
       <h1><%= @pin.name %></h1>
       <br>
       <h4><%= @pin.address %></h4>
@@ -23,8 +24,9 @@
             <%= f.input :private, as: :boolean, input_html: { class: "toggle" } %>
           </div>
         </div>
-      <%= f.submit "Save", class: "form-button" %>
+
       <% end %>
+      <a class="btn btn-primary" href="/pins/index" role="button">Back to my pins</a>
       </div>
     </div>
   </div>
