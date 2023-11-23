@@ -30,6 +30,7 @@ class PinsController < ApplicationController
   def show
     @pin = Pin.find(params[:id])
     authorize @pin
+    @related_pins = @pin.find_related_tags
   end
 
   def new
@@ -42,10 +43,34 @@ class PinsController < ApplicationController
     @pin.user = current_user
     authorize @pin
     if @pin.save
+      tags = params[:pin][:tag_ids]
+      tags.each do |tag|
+        new_tag = ActsAsTaggableOn::Tag.where(id: tag.to_i)
+        @pin.tag_list.add(new_tag)
+        @pin.save
+      end
       redirect_to pin_path(@pin)
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @pin = Pin.find(params[:id])
+    authorize @pin
+  end
+
+  def update
+    @pin = Pin.find(params[:id])
+    authorize @pin
+    @pin.update(pin_params)
+    tags = params[:pin][:tag_ids]
+      tags.each do |tag|
+        new_tag = ActsAsTaggableOn::Tag.where(id: tag.to_i)
+        @pin.tag_list.add(new_tag)
+        @pin.save
+      end
+    redirect_to pin_path(@pin)
   end
 
   def tagged
@@ -91,6 +116,6 @@ class PinsController < ApplicationController
   private
 
   def pin_params
-    params.require(:pin).permit(:photo, :name, :address, :longitude, :latitude, :comments, :icon, :rating, :visited, :private, tag_list: [])
+    params.require(:pin).permit(:photo, :name, :address, :longitude, :latitude, :comments, :icon, :rating, :visited, :private, :tag_list)
   end
 end
