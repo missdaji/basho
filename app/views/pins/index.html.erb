@@ -8,7 +8,9 @@
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
   data-toggle-target="map"></div>
+
   <div data-toggle-target="list" class="d-none">
+    <%= link_to "Update my location", pins_path(), data: {"controller": "geolocate"} %>
     <main class="p-4">
       <h2>My Pins</h2>
       <div class="row justify-content-center">
@@ -49,8 +51,9 @@
                 <%= image_tag "jouls.jpg", class: "", alt: "Card image cap", height: "60", crop: :fill %>
               <% end %>
               <div class="card-product-infos">
-                <h5 class="card-title"><%= pin.name %></h5>
-                <p class="card-text"><%= pin.address %></p>
+                <p class="card-text"><%= number_with_precision(pin.distance_to(@here), precision: 2) %> km</p>
+                <h5 class="card-title"><%= truncate(pin.name, :length => 15) %></h5>
+                <p class="card-text"><%= truncate(pin.address, :length => 30) %></p>
               </div>
             </div>
           </div>

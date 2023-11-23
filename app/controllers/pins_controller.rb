@@ -21,6 +21,9 @@ class PinsController < ApplicationController
         marker_html: render_to_string(partial: "marker", locals: {pin: pin}) # , locals: {pin: pin}
       }
     end
+
+    @here = params["lat"].to_f, params["lon"].to_f
+    # raise
   end
 
   def show
