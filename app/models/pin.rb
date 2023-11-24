@@ -4,6 +4,7 @@ class Pin < ApplicationRecord
   ActsAsTaggableOn::Tag.least_used(10)
   belongs_to :user
   has_one_attached :photo
+  attr_accessor :use_current_location, :lat, :lon
 
   after_initialize :set_default, if: :new_record?
 
@@ -14,6 +15,11 @@ class Pin < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+
+  def blank_stars
+    5 - rating
+  end
+
 
   private
 
