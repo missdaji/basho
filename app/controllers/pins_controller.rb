@@ -118,6 +118,6 @@ class PinsController < ApplicationController
   private
 
   def pin_params
-    params.require(:pin).permit(:photo, :name, :address, :longitude, :latitude, :comments, :icon, :rating, :visited, :use_current_location, :lat, :lon, :private, tag_list: [])
+    params.require(:pin).permit(:photo, :name, :address, :longitude, :latitude, :comments, :icon, :rating, :visited, :use_current_location, :lat, :lon, :private, :tag_list)
   end
 end
