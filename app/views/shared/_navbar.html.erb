@@ -15,16 +15,11 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to current_user.username, "#", class: "nav-link" %>
+            <%= link_to current_user.username, "#", id: "username-navbar", class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-          <%# CHANGE AVATAR BELOW WITH CLOUDINARY ADDRESS %>
             <%= cl_image_tag current_user.avatar.key, class: "avatar", alt: "dropdown menu" %>
-          <%# ------- CLOUDINARY BELOW-------- %>
-            <%# <%= cl_image_tag current_user.avatar.key, class: "avatar-large dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <%# END OF CHANGE %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Profile", "#", class: "dropdown-item" %>
