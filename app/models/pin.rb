@@ -4,6 +4,7 @@ class Pin < ApplicationRecord
   ActsAsTaggableOn::Tag.least_used(10)
   belongs_to :user
   has_one_attached :photo
+  attr_accessor :use_current_location, :lat, :lon
 
   after_initialize :set_default, if: :new_record?
 
