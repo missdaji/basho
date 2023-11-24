@@ -6,7 +6,7 @@ export default class extends Controller {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position.coords)
-        this.element.href += `?lat=${position.coords.latitude}&lon=${position.coords.longitude}`
+        this.element.href += `&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
       });
     }
   }
