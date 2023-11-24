@@ -5,10 +5,13 @@
 </div>
 <div class="row justify-content-center">
   <div class="col-12 col-md-6">
-    <div class="p-5">
+    <div class="p-5" data-controller="toggle-form">
       <%= simple_form_for(@pin) do |f| %>
         <%= f.input :name %>
-        <%= f.input :address %>
+        <%= f.input :address, input_html: { id: "showAddress"} %>
+        <%= f.input :use_current_location, as: :boolean, input_html: { class: "toggle", :data => { action: "click->toggle-form#showAddress" } } %>
+        <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
+        <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
         <% collection = [
         'utensils',
         'ice-cream',

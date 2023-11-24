@@ -8,7 +8,13 @@
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
   data-toggle-target="map"></div>
-
+  <div class="container">
+    <%= link_to new_pin_path(:lat => params[:lat], :lon => params[:lon]) do %>
+      <button class="btn btn-primary circle-button d-flex fixed-bottom" style="font-size: 50px;">
+        +
+      </button>
+    <% end %>
+  </div>
   <div data-toggle-target="list" class="d-none">
     <%= link_to "Update my location", pins_path(), data: {"controller": "geolocate"} %>
     <main class="p-4">
@@ -39,27 +45,32 @@
           <%= hidden_field_tag(:notyetvisited, 1) %>
           <%= submit_tag "Not visited", name: "", class: "btn btn-primary" %>
         <% end %>
-      </div>
-      <div class="row justify-content-center">
-        <% @pins.each do |pin| %>
-        <div class="col-lg-auto">
-          <div class="col-12 col-md-6 card mb-9 shadow my-2 p-0" >
-            <div class="card-product">
-              <% if pin.photo.attached? %>
-                <%= cl_image_tag pin.photo.key, crop: :fill %>
-              <% else %>
-                <%= image_tag "jouls.jpg", class: "", alt: "Card image cap", height: "60", crop: :fill %>
-              <% end %>
-              <div class="card-product-infos">
-                <p class="card-text"><%= number_with_precision(pin.distance_to(@here), precision: 2) %> km</p>
-                <h5 class="card-title"><%= truncate(pin.name, :length => 15) %></h5>
-                <p class="card-text"><%= truncate(pin.address, :length => 30) %></p>
+        <%#= link_to new_pin_path(:lat => params[:lat], :lon => params[:lon]) do %>
+          <%# <button class="btn btn-primary circle-button">
+            +
+          </button> %>
+          <%# end %>
+        </div>
+        <div class="row justify-content-center">
+          <% @pins.each do |pin| %>
+            <div class="col-lg-auto">
+              <div class="col-12 col-md-6 card mb-9 shadow my-2 p-0" >
+                <div class="card-product">
+                  <% if pin.photo.attached? %>
+                    <%= cl_image_tag pin.photo.key, crop: :fill %>
+                  <% else %>
+                    <%= image_tag "jouls.jpg", class: "", alt: "Card image cap", height: "60", crop: :fill %>
+                  <% end %>
+                  <div class="card-product-infos">
+                    <p class="card-text"><%= number_with_precision(pin.distance_to(@here), precision: 2) %> km</p>
+                    <h5 class="card-title"><%= truncate(pin.name, :length => 15) %></h5>
+                    <p class="card-text"><%= truncate(pin.address, :length => 30) %></p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-         </div>
-        <% end %>
-      </div>
-    </main>
+          <% end %>
+        </div>
+      </main>
+    </div>
   </div>
-</div>

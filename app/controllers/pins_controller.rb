@@ -18,7 +18,7 @@ class PinsController < ApplicationController
       {
         lat: pin.latitude,
         lng: pin.longitude,
-        marker_html: render_to_string(partial: "marker", locals: {pin: pin}) # , locals: {pin: pin}
+        marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
       }
     end
 
@@ -38,6 +38,8 @@ class PinsController < ApplicationController
 
   def create
     @pin = Pin.new(pin_params)
+    # debugger
+    @results = Geocoder.search([pin_params[:lat], pin_params[:lon]])
     @pin.user = current_user
     authorize @pin
     if @pin.save
@@ -90,6 +92,6 @@ class PinsController < ApplicationController
   private
 
   def pin_params
-    params.require(:pin).permit(:photo, :name, :address, :longitude, :latitude, :comments, :icon, :rating, :visited, :private, tag_list: [])
+    params.require(:pin).permit(:photo, :name, :address, :longitude, :latitude, :comments, :icon, :rating, :visited, :use_current_location, :lat, :lon, :private, tag_list: [])
   end
 end

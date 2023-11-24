@@ -2,6 +2,7 @@ class Pin < ApplicationRecord
   acts_as_taggable_on :tags
   belongs_to :user
   has_one_attached :photo
+  attr_accessor :use_current_location, :lat, :lon
 
   after_initialize :set_default, if: :new_record?
 
