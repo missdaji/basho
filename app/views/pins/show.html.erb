@@ -1,7 +1,10 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
-      <%= cl_image_tag @pin.photo.key, crop: :fill %>
+      <div class="d-flex justify-content-center pt-2 gap-2">
+      <%= cl_image_tag @pin.photo.key, height: "300", crop: :scale %>
+      </div>
+      <br>
       <h1 class="py-2"><%= @pin.name %></h1>
       <br>
       <h4 class="py-2"><%= @pin.address %></h4>
