@@ -15,6 +15,11 @@ class Pin < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
+  def blank_stars
+    5 - rating
+  end
+
+
   private
 
   def set_default

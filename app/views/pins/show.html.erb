@@ -1,46 +1,61 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
-      <div class="d-flex justify-content-center pt-2 gap-2">
-      <%= cl_image_tag @pin.photo.key, height: "300", crop: :scale %>
+      <div class="d-flex justify-content-center">
+      <%= cl_image_tag @pin.photo.key, width: "100%", height: "300", class: "object-fit-cover"%>
       </div>
       <br>
-      <h1 class="py-2"><%= @pin.name %></h1>
-      <br>
-      <h4 class="py-2"><%= @pin.address %></h4>
-      <br>
-      <p class="py-2">Tags</p>
-      <ul class="py-2">
+      <div class="d-flex justify-content-start p-3">
+        <div class="show-icon pr-5">
+        <%= "<i class='fa-solid fa-#{@pin.icon}'></i>".html_safe %>
+        </div>
+        <div class="row justify-content-center">
+        <h1><%= @pin.name %></h1>
+        <h5><%= @pin.address %></h5>
+        <br>
+        </div>
+      </div>
+      <ul class="p-3">
         <% tags = @pin.tag_list %>
         <% tags.each do |tag| %>
         <li class="tags"><%= tag %></li>
         <% end %>
-        </ul>
-      <%= simple_form_for(@pin) do |f| %>
+      </ul>
+      <hr>
+      <div class="d-flex justify-content-between p-3">
+        <% if @pin.visited %>
+          <div class="tags-show">Visited</div>
+          <% else %>
+          <div class="tags-show">Not visited</div>
+        <% end %>
+          <div class="justify-content-end">
+          <% @pin.rating.to_i.times do %>
+          <i class="fa-solid fa-star"></i>
+          <% end %>
+          <% @pin.blank_stars.times do %>
+          <i class="fa-regular fa-star"></i>
+          <% end %>
+          </div>
+          </div>
+      </div>
     </div>
-  </div>
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6 mb-3">
-      <p class="py-2">Rating : <%= @pin.rating %>/5</p>
-      <p class="py-2">Comments :</p>
+    <hr>
+      <p>Comments :</p>
       <%= @pin.comments  %>
-      <div class="row justify-content-center">
+      <hr>
+      <div class="row justify-content-between">
         <div class="col-12 col-sm-6 py-2">
-          <div class="d-flex justify-content-between py-2">
-            <% if @pin.visited %>
-              <div class="tags">Visited</div>
-              <% else %>
-              <div class="tags">Not visited</div>
-              <% end %>
+          <div class="d-flex justify-content-between p-3">
             <% if @pin.private %>
-              <div class="tags">Private</div>
+              <div class="tags-show">Private</div>
               <% else %>
-              <div class="tags">Public</div>
+              <div class="tags-show">Public</div>
               <% end %>
-          </div>
+              </div>
           </div>
         </div>
-      <% end %>
       <div class="row justify-content-center py-3">
       <a href="/pins/index" class="btn btn-primary">Back to my pins</a>
       </div>
