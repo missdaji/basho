@@ -30,7 +30,7 @@
         <p>Icon</p>
         <% collection.each do |icon| %>
           <label class="icon_checkbox">
-            <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon}'></i>".html_safe %>
+            <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon} px-2'></i>".html_safe %>
           </label>
         <% end %>
         <div class="py-2">
