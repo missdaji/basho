@@ -79,3 +79,31 @@
   font-size: 50px;
   color: #343192;
 }
+
+.tag-selector-new {
+  position: absolute;
+  transform: scale(0);
+}
+
+.tag-selector-new + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.8rem;
+  border-radius: 50rem;
+  padding: 0.1rem 0.5rem;
+  background-color: #FF0B67;
+  opacity: 0.5;
+  color: #ECEAFF;
+  border: 1px solid #7E73FF;
+  margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
+  text-decoration: none;
+}
+
+.tag-selector-new:checked + label {
+  background-color: #FF0B67;
+  opacity: 1;
+  color: white;
+  text-decoration: none;
+}
