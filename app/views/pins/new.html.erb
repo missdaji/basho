@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
-  <div class="col-12 col-md-6 px-5 pb-1">
-    <h1>Create your new pin</h1>
+  <div class="col-12 col-md-6 px-5">
+    <h1>New pin</h1>
   </div>
 </div>
 <div class="row justify-content-center">
@@ -12,6 +12,7 @@
         <%= f.input :use_current_location, as: :boolean, input_html: { class: "toggle", :data => { action: "click->toggle-form#showAddress" } } %>
         <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
         <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
+        <br>
         <% collection = [
         'utensils',
         'ice-cream',
@@ -26,11 +27,14 @@
         'landmark',
         'music'
         ] %>
+        <p>Icon</p>
         <% collection.each do |icon| %>
           <label class="icon_checkbox">
             <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon}'></i>".html_safe %>
           </label>
         <% end %>
+        <div class="py-2">
+        </div>
         <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
         <%= f.association :tags,
                   as: :check_boxes,
@@ -47,7 +51,7 @@
         </div>
         <%= f.input :comments %>
         <%= f.input :photo, as: :file %>
-        <%= f.submit "Save", class: "form-button" %>
+        <%= f.submit "Save", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>

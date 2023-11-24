@@ -19,6 +19,10 @@ class PinPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    true
+  end
+
   def visit?
     record.user == user
   end
