@@ -7,6 +7,7 @@
       <%= button_tag "list", class: "btn-toggle btn-toggle-list" %>
     <% end %>
   </div>
+    <%= link_to "Update my location", pins_path_with_params(view: 'list'), data: {"controller": "geolocate"} %>
   <div data-controller="filters">
     <div class="btn-filters" data-action="click->filters#showFilters">
       <i class="fa-solid fa-filter" style="color: #ffffff;"></i>
@@ -15,7 +16,6 @@
       <div class="px-4 pt-2">
 
 
-    <%= link_to "Update my location", pins_path(), data: {"controller": "geolocate"} %>
 
 
         <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
@@ -27,12 +27,12 @@
         <% end %>
         <div class="d-flex justify-content-center pt-2 gap-2">
           <div>
-            <%= link_to pins_path_with_params(visited: 1) do  %>
+            <%= link_to pins_path_with_params(visited: 1), data: {"controller": "geolocate"} do  %>
               <%= button_tag "Visited", class: "btn btn-primary" %>
             <% end %>
           </div>
           <div>
-            <%= link_to pins_path_with_params(visited: 0) do  %>
+            <%= link_to pins_path_with_params(visited: 0), data: {"controller": "geolocate"} do  %>
               <%= button_tag "Not visited", class: "btn btn-primary" %>
             <% end %>
           </div>
@@ -49,12 +49,12 @@
     <main class="px-4">
       <div class="d-flex justify-content-center pt-2 gap-2">
         <div>
-          <%= link_to pins_path_with_params(sort_by: :name) do  %>
+          <%= link_to pins_path_with_params(sort_by: :name), data: {"controller": "geolocate"} do  %>
             <%= button_tag "Sort by name", name: "", class: "btn btn-primary" %>
           <% end %>
         </div>
         <div>
-          <%= link_to pins_path_with_params(sort_by: :date) do  %>
+          <%= link_to pins_path_with_params(sort_by: :date), data: {"controller": "geolocate"} do  %>
             <%= button_tag "Sort by date", name: "", class: "btn btn-primary" %>
           <% end %>
         </div>
