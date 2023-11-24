@@ -86,6 +86,7 @@
                   <h5 class="card-title"><%= truncate(pin.name, :length => 15) %></h5>
                   <p class="card-text"><%= truncate(pin.address, :length => 30) %></p>
                 </div>
+                <%= link_to '', pin_path(pin.id), class: 'card-link' %>
               </div>
             </div>
           </div>
