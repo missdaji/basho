@@ -25,8 +25,19 @@
             params[:query],
             class: "form-control",
             placeholder: "Search by name or comment" %>
+
           <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
         <% end %>
+
+        <ul class="p-3">
+        <% tags = current_user.tag_pins %>
+        <% tags.each do |tag| %>
+        <div class="tags-show">
+        <li><%= tag %></li></label>
+        </div>
+        <% end %>
+      </ul>
+
         <div class="d-flex justify-content-center pt-2 gap-2">
           <div>
             <%= link_to pins_path_with_params(visited: 1), data: {"controller": "geolocate"} do  %>
