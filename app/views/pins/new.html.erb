@@ -35,19 +35,11 @@
         </div>
         <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
         <div data-controller="color">
-        <%= f.association :tags,
-      <p>Icon</p>
-      <% collection.each do |icon| %>
-        <label class="icon_checkbox">
-          <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon} px-2'></i>".html_safe %>
-        </label>
-      <% end %>
-      <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
       <%= f.association :tags,
                   as: :check_boxes,
                   collection: current_user.tag_pins,
                   input_html: { class: "tag-selector" },
-                  wrapper_html: { data: {color_target: "tags"} },
+                  # wrapper_html: { data: {color_target: "tags"} },
                   item_wrapper_class: 'tag-item' %>
                   <!-- Button trigger modal -->
         <div class="row justify-content-center p-3">
@@ -65,8 +57,8 @@
               </div>
               <div class="modal-body">
                 <%= f.input :tag_list, label: "Add your tag", input_html: { data: {color_target: "name"} } %>
-                <label for="favcolor">Select your color </label>
-                <input type="color" id="favcolor" name="favcolor" value="#ff0000">
+                <%# <label for="favcolor">Select your color </label>
+                <input type="color" id="favcolor" name="favcolor" value="#ff0000"> %>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -77,20 +69,14 @@
         </div>
         </div>
 
-            <div class="d-flex justify-content-between px-5 py-3">
-              <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
-              <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
-        </div>
+
         <%= f.input :comments %>
         <%= f.input :photo, as: :file %>
-        <div class="row justify-content-center p-3">
-      <%= f.input :tag_list, label: "Add your tags (separated by a coma)" %>
+
       <div class="d-flex justify-content-between px-5">
         <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
         <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
       </div>
-      <%= f.input :comments %>
-      <%= f.input :photo, as: :file %>
       <div class="row justify-content-center p-3">
         <%= f.submit "Save", class: "btn btn-primary" %>
       </div>
