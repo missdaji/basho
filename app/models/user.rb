@@ -6,4 +6,10 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def tag_pins
+    pins.map do |pin|
+      pin.tag_list
+    end.flatten.uniq
+  end
 end
