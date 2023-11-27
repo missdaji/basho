@@ -41,7 +41,10 @@ class PinsController < ApplicationController
   def create
     @pin = Pin.new(pin_params)
     # debugger
-    @results = Geocoder.search([pin_params[:lat], pin_params[:lon]])
+    if @pin.address.nil?
+      @results = Geocoder.search([pin_params[:lat], pin_params[:lon]])
+      @pin.address = @results.first.display_name
+    end
     @pin.user = current_user
     authorize @pin
     if @pin.save
