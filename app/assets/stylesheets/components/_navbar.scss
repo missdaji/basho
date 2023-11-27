@@ -2,6 +2,7 @@
   justify-content: space-between;
   background: $egyptian-blue;
   vertical-align: middle;
+  margin-top: -5px;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -19,9 +20,18 @@
 }
 
 .navbar {
-  height: 60px;
+  height: 65px;
+  z-index: 1000;
 }
 
 #username-navbar {
   color: $baby-powder;
+}
+
+.dropdown-menu-end.show {
+  text-align: right;
+}
+
+.dropdown-menu {
+  min-width: 100px;
 }
