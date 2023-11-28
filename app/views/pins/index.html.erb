@@ -42,24 +42,22 @@
 <%# END SORTING %>
     <div class="d-none" data-filters-target="filtersCard">
       <div class="px-4 pt-2">
-        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
-          <%= text_field_tag :query,
-            params[:query],
+        <%= form_with url: pins_path, method: :get do |f| %>
+          <%= f.text_field :query,
+            # params[:query],
             class: "form-control",
             placeholder: "Search by name or comment" %>
-
+          <%= f.collection_check_boxes :tags,
+                  current_user.tags,
+                  :name,
+                  :name,
+                  include_hidden: false do |b| %>
+                  <%= b.label class:"tags-show" do %>
+                    <%= b.check_box + b.text %>
+                    <%end%>
+                  <% end %>
           <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
         <% end %>
-
-        <ul class="p-3">
-        <% tags = current_user.tag_pins %>
-        <% tags.each do |tag| %>
-        <div class="tags-show">
-        <li><%= tag %></li></label>
-        </div>
-        <% end %>
-      </ul>
-
         <div class="d-flex justify-content-center pt-2 gap-2">
           <div>
             <%= link_to pins_path_with_params(visited: 1), data: {"controller": "geolocate"} do  %>
@@ -71,6 +69,7 @@
               <%= button_tag "Not visited", class: "btn btn-primary" %>
             <% end %>
           </div>
+
         </div>
       </div>
     </div>
