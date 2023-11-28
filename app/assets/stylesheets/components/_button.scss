@@ -37,4 +37,8 @@
   bottom: 24px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   border: none;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1;
 }

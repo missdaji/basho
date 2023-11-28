@@ -1,0 +1,43 @@
+<!--<section class="place-info">
+  <div class="bar-image popup-photo">
+    <%= cl_image_tag pin.photo.key, crop: :fill %>
+  </div>
+  <div class="bar-details">
+    <h1><%= pin.name %></h1>
+    <p><%= pin.address %></p>
+    <div class="justify-content-end">
+      <% pin.rating.to_i.times do %>
+        <i class="fa-solid fa-star"></i>
+      <% end %>
+      <% pin.blank_stars.times do %>
+        <i class="fa-regular fa-star"></i>
+      <% end %>
+    </div>
+  </div>
+</section> -->
+<div>
+  <div class="popup-photo">
+    <img src="<%= cl_image_path pin.photo.key%>" style="object-fit: cover; width: 100vh;">
+    <div class="popup-icon">
+      <i class='fa-solid fa-<%= pin.icon %> popup-icon2'></i>
+    </div>
+  </div>
+  <div style="padding: 5px;">
+    <div class="card-body">
+      <blockquote class="blockquote mb-">
+        <p>
+          <h2 class="card-title"><%= pin.name %></h2>
+        </p>
+        <p class="border-bottom border-top border-dark" style="font-size: 15px;"><%= pin.address %></p>
+      </blockquote>
+    </div>
+    <div>
+      <ul class="p-3">
+        <% tags = pin.tag_list %>
+        <% tags.each do |tag| %>
+          <li class="tags"><%= tag %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

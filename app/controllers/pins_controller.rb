@@ -46,6 +46,7 @@ class PinsController < ApplicationController
           lat: pin.latitude,
           lng: pin.longitude,
           marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
+          info_html: render_to_string(partial: "info", locals: { pin: pin }) # , locals: {pin: pin}
         }
       end
     end
@@ -66,9 +67,11 @@ class PinsController < ApplicationController
   def create
     @pin = Pin.new(pin_params)
     # debugger
-    if @pin.address.nil?
+    if @pin.address == ""
       @results = Geocoder.search([pin_params[:lat], pin_params[:lon]])
       @pin.address = @results.first.display_name
+      @pin.latitude = pin_params[:lat]
+      @pin.longitude = pin_params[:lon]
     end
     @pin.user = current_user
     authorize @pin
