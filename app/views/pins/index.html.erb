@@ -18,6 +18,28 @@
         <% end %>
       </div>
     </div>
+<%# SORTING %>
+    <div class="d-flex justify-content-end mx-2">
+      <div class="d-flex my-auto align-items-end pt-2 gap-2">
+        <p class="my-auto list-container">Sort by:</p>
+        <div class="btn-filters list-container" >
+          <%= link_to pins_path_with_params(sort_by: :name), data: {"controller": "geolocate"} do  %>
+            <i class="fa-solid fa-arrow-down-a-z" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+        <div class="btn-filters list-container" >
+          <%= link_to pins_path_with_params(sort_by: :date), data: {"controller": "geolocate"} do  %>
+            <i class="fa-solid fa-calendar-plus" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+        <div class="btn-filters list-container" >
+          <%= link_to pins_path_with_params(sort_by: :distance), data: {"controller": "geolocate"} do  %>
+            <i class="fa-solid fa-compass-drafting" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<%# END SORTING %>
     <div class="d-none" data-filters-target="filtersCard">
       <div class="px-4 pt-2">
         <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
@@ -68,28 +90,6 @@
 
   <div class="list-container">
     <main class="px-4">
-<%# SORTING %>
-      <div class="d-flex justify-content-center pt-2 gap-2">
-        <div>
-          <p>Sort by:</p>
-        </div>
-        <div class="btn-filters list-container" >
-          <%= link_to pins_path_with_params(sort_by: :name), data: {"controller": "geolocate"} do  %>
-            <i class="fa-solid fa-arrow-down-a-z" style="color: #ffffff;"></i>
-          <% end %>
-        </div>
-        <div class="btn-filters list-container" >
-          <%= link_to pins_path_with_params(sort_by: :date), data: {"controller": "geolocate"} do  %>
-            <i class="fa-solid fa-calendar-plus" style="color: #ffffff;"></i>
-          <% end %>
-        </div>
-        <div class="btn-filters list-container" >
-          <%= link_to pins_path_with_params(sort_by: number_with_precision(pins(id).distance_to(@here), precision: 2)), data: {"controller": "geolocate"} do  %>
-            <i class="fa-solid fa-compass-drafting" style="color: #ffffff;"></i>
-          <% end %>
-        </div>
-      </div>
-<%# END SORTING %>
       <div class="row justify-content-center">
         <% @pins.each do |pin| %>
           <div class="col-lg-auto">
