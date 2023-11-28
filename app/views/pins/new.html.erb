@@ -34,7 +34,9 @@
         <% end %>
         <div class="py-2">
         </div>
-        <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
+        <div class="py-3">
+        <%= f.input :rating, collection: [1, 2, 3, 4, 5], as: :radio_buttons, item_wrapper_class: 'inline' %>
+        </div>
         <div data-controller="color">
         <%= f.association :tags,
                   as: :check_boxes,

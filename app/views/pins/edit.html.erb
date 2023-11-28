@@ -31,7 +31,9 @@
           <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon} px-2'></i>".html_safe %>
         </label>
       <% end %>
+      <div class="py-3">
       <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
+      </div>
       <div data-controller="color">
       <%= f.association :tags,
                   as: :check_boxes,
