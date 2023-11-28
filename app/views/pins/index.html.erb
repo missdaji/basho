@@ -104,6 +104,16 @@
                   <p class="card-text"><%= number_with_precision(pin.distance_to(@here), precision: 2) %> km</p>
                   <h5 class="card-title"><%= truncate(pin.name, :length => 15) %></h5>
                   <p class="card-text"><%= truncate(pin.address, :length => 30) %></p>
+
+                  <ul class="p-1">
+                  <% card_tags = pin.tag_list %>
+                  <% card_tags.each do |card_tag| %>
+                  <div class="tags-show-card">
+                  <li><%= card_tag %></li></label>
+                  </div>
+                  <% end %>
+                  </ul>
+
                 </div>
                 <%= link_to '', pin_path(pin.id), class: 'card-link' %>
               </div>
