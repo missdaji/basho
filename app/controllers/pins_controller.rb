@@ -23,22 +23,15 @@ class PinsController < ApplicationController
       @pins = @pins.where(visited: true)
     elsif params[:visited] == '0'
       @pins = @pins.where(visited: false)
-    elsif params[:tags]
-      @pins = Pin.tagged_with(params[:tags])
-    end
-    @pins = policy_scope(@pins)
-    @markers = @pins.geocoded.map do |pin|
-      {
-        lat: pin.latitude,
-        lng: pin.longitude,
-        marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
-      }
     elsif params[:sort_by] == 'distance'
       @pins = @pins.to_a.sort_by! do |pin|
         pin.distance_to(@here)
       end
+    elsif params[:tags]
+      @pins = Pin.tagged_with(params[:tags])
       # raise
     end
+    @pins = policy_scope(@pins)
     if @pins.class == ActiveRecord::Relation
       @markers = @pins.geocoded.map do |pin|
         {
@@ -56,7 +49,6 @@ class PinsController < ApplicationController
         }
       end
     end
-
     # raise
   end
 
