@@ -41,7 +41,7 @@ class PinsController < ApplicationController
         }
       end
     else
-      @markers = Pin.all.geocoded.map do |pin|
+      @markers = @pins.geocoded.map do |pin|
         {
           lat: pin.latitude,
           lng: pin.longitude,
