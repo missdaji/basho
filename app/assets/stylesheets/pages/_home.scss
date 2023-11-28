@@ -1,1 +1,50 @@
 // Specific CSS for your home-page
+.homepage {
+  // background-color: $persian-blue;
+  background-image: image_url("background.jpg");
+  margin-top: -8px;
+  padding: 0;
+  margin-bottom: -15px;
+  z-index: 1000;
+}
+
+.homepage-content {
+  width: 100%;
+  padding: 20px 40px 20px 40px;
+}
+
+.homepage h2 {
+  color: $baby-powder;
+  font-weight: 600;
+  text-align: center;
+  padding: 0 20px 0 20px;
+}
+
+.homepage p {
+  color: $baby-powder;
+  font-weight: 400;
+  text-align: center;
+  padding: 40px 20px 20px 20px;
+}
+
+.description {
+  color: $baby-powder;
+  font-weight: 400;
+  text-align: center;
+  padding: 20px 20px 20px 20px;
+}
+
+.start-button {
+  margin: 15px auto;
+  text-align: center;
+}
+
+#start {
+  text-decoration: none;
+  color: $baby-powder;
+  background-color: $bright-pink-crayola;
+  padding: 10px 25px;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  margin: 15px auto;
+}

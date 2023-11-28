@@ -1,8 +1,17 @@
 class PinsController < ApplicationController
   def index
     @pins = Pin.all
-    @pins = policy_scope(Pin)
     @filters_list = %i[view query sort_by visited]
+    ## Default Location: Le Wagon Tokyo
+    # @here = [35.6339404, 139.7082188]
+    ## end of Default
+    if params["lat"] == nil
+      ## Default Location: Le Wagon Tokyo
+      @here = [35.6339404, 139.7082188]
+    else
+      @here = params["lat"].to_f, params["lon"].to_f
+    end
+
     if params[:query].present?
       sql_subquery = "name ILIKE :query OR comments ILIKE :query"
       @pins = @pins.where(sql_subquery, query: "%#{params[:query]}%")
@@ -14,17 +23,33 @@ class PinsController < ApplicationController
       @pins = @pins.where(visited: true)
     elsif params[:visited] == '0'
       @pins = @pins.where(visited: false)
+    elsif params[:sort_by] == 'distance'
+      @pins = @pins.to_a.sort_by! do |pin|
+        pin.distance_to(@here)
+      end
+    elsif params[:tags]
+      @pins = Pin.tagged_with(params[:tags])
+      # raise
     end
-    @markers = @pins.geocoded.map do |pin|
-      {
-        lat: pin.latitude,
-        lng: pin.longitude,
-        marker_html: render_to_string(partial: "marker", locals: { pin: pin }), # , locals: {pin: pin}
-        info_html: render_to_string(partial: "info", locals: { pin: pin }) # , locals: {pin: pin}
-      }
+    @pins = policy_scope(@pins)
+    if @pins.class == ActiveRecord::Relation
+      @markers = @pins.geocoded.map do |pin|
+        {
+          lat: pin.latitude,
+          lng: pin.longitude,
+          marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
+        }
+      end
+    else
+      @markers = @pins.geocoded.map do |pin|
+        {
+          lat: pin.latitude,
+          lng: pin.longitude,
+          marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
+          info_html: render_to_string(partial: "info", locals: { pin: pin }) # , locals: {pin: pin}
+        }
+      end
     end
-
-    @here = params["lat"].to_f, params["lon"].to_f
     # raise
   end
 
@@ -53,7 +78,8 @@ class PinsController < ApplicationController
     if @pin.save
       tags = params[:pin][:tag_ids]
       tags.each do |tag|
-        new_tag = ActsAsTaggableOn::Tag.where(id: tag.to_i)
+        # next if tag.blank?
+        new_tag = ActsAsTaggableOn::Tag.find_by(name: tag)
         @pin.tag_list.add(new_tag)
         @pin.save
       end

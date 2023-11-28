@@ -23,7 +23,7 @@
 }
 
 .toggle:checked + label::before {
-  background-color: #343192;
+  background-color: $persian-blue;
 }
 
 .toggle + label::after {

@@ -1,64 +1,65 @@
-<div class="container">
+
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
       <div class="d-flex justify-content-center">
-      <%= cl_image_tag @pin.photo.key, width: "100%", height: "300", class: "object-fit-cover"%>
-      </div>
-      <br>
-      <div class="d-flex justify-content-start p-3">
-        <div class="show-icon pr-5">
-        <%= "<i class='fa-solid fa-#{@pin.icon}'></i>".html_safe %>
-        </div>
-        <div class="row justify-content-center">
-        <h1><%= @pin.name %></h1>
-        <h5><%= @pin.address %></h5>
-        <br>
-        </div>
-      </div>
-      <ul class="p-3">
-        <% @pin.user_id = current_user %>
-        <% tags = @pin.tag_list %>
-        <% tags.each do |tag| %>
-        <li class="tags"><%= tag %></li>
-        <% end %>
-      </ul>
-      <hr>
-      <div class="d-flex justify-content-between p-3">
-        <% if @pin.visited %>
-          <div class="tags-show">Visited</div>
-          <% else %>
-          <div class="tags-show">Not visited</div>
-        <% end %>
-          <div class="justify-content-end">
-          <% @pin.rating.to_i.times do %>
-          <i class="fa-solid fa-star"></i>
-          <% end %>
-          <% @pin.blank_stars.times do %>
-          <i class="fa-regular fa-star"></i>
-          <% end %>
-          </div>
-          </div>
-      </div>
+  <%= cl_image_tag @pin.photo.key, width: "100%", height: "300", class: "object-fit-cover"%>
+</div>
+<br>
+<div class="px-4">
+  <div class="d-flex px-1">
+    <div class="show-icon pr-4">
+      <%= "<i class='fa-solid fa-#{@pin.icon}'></i>".html_safe %>
     </div>
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-6 mb-3">
-    <hr>
-      <em class="p-3"><%= @pin.comments  %></em>
-      <hr>
-      <div class="row justify-content-between">
-        <div class="col-12 col-sm-6 py-2">
-          <div class="d-flex justify-content-between p-3">
-            <% if @pin.private %>
-              <div class="tags-show">Private</div>
-              <% else %>
-              <div class="tags-show">Public</div>
-              <% end %>
-              </div>
-          </div>
-        </div>
-      <div class="row justify-content-center p-3">
-      <a href="/pins/index" class="btn btn-primary">Back to my pins</a>
-      </div>
+    <div class="row justify-content-start">
+      <h1><%= @pin.name %></h1>
+      <h5><%= @pin.address %></h5>
     </div>
   </div>
+  <ul class="px-1 py-4">
+    <% @pin.user_id = current_user %>
+    <% tags = @pin.tag_list %>
+    <% tags.each do |tag| %>
+      <li class="tags"><%= tag %></li>
+    <% end %>
+  </ul>
+  <hr>
+  <div class="d-flex justify-content-between align-items-center">
+    <% if @pin.visited %>
+      <div class="tags-show">Visited</div>
+    <% else %>
+      <div class="tags-show">Not visited</div>
+    <% end %>
+    <div class="justify-content-end">
+      <% @pin.rating.to_i.times do %>
+        <i class="fa-solid fa-star"></i>
+      <% end %>
+      <% @pin.blank_stars.times do %>
+        <i class="fa-regular fa-star"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="mb-3">
+    <hr>
+    <em><%=@pin.comments%></em>
+    <hr>
+    <div class="d-flex justify-content-between align-items-center">
+      <% if @pin.private %>
+        <div class="tags-show">Private</div>
+      <% else %>
+        <div class="tags-show">Public</div>
+      <% end %>
+      <div class="justify-content-end">
+        <div class="btn-filters">
+          <%= link_to edit_pin_path do %>
+            <i class="fa-solid fa-pencil" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center p-3">
+      <a href="/pins/index" class="btn btn-primary">Back to my pins</a>
+    </div>
+  </div>
+</div>
+</div>
 </div>
