@@ -37,7 +37,8 @@ class PinsController < ApplicationController
         {
           lat: pin.latitude,
           lng: pin.longitude,
-          marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
+          marker_html: render_to_string(partial: "marker", locals: { pin: pin }), # , locals: {pin: pin}
+          info_html: render_to_string(partial: "info", locals: { pin: pin }) # , locals: {pin: pin}
         }
       end
     else
@@ -45,7 +46,7 @@ class PinsController < ApplicationController
         {
           lat: pin.latitude,
           lng: pin.longitude,
-          marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
+          marker_html: render_to_string(partial: "marker", locals: { pin: pin }), # , locals: {pin: pin}
           info_html: render_to_string(partial: "info", locals: { pin: pin }) # , locals: {pin: pin}
         }
       end
