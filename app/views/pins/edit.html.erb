@@ -1,0 +1,51 @@
+<div class="col-12 col-sm-6">
+  <div class="p-3" data-controller="toggle-form">
+    <h1>Edit pin</h1>
+    <br>
+    <%= simple_form_for(@pin) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :address, input_html: { id: "showAddress"} %>
+      <%= f.input :use_current_location, as: :boolean, input_html: { class: "toggle", :data => { action: "click->toggle-form#showAddress" } } %>
+      <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
+      <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
+      <% collection = [
+        'utensils',
+        'ice-cream',
+        'burger',
+        'pizza-slice',
+        'carrot',
+        'mug-hot',
+        'martini-glass',
+        'beer-mug-empty',
+        'bag-shopping',
+        'tree',
+        'landmark',
+        'book',
+        'music',
+        'gamepad',
+        'dice'
+        ] %>
+      <p>Icon</p>
+      <% collection.each do |icon| %>
+        <label class="icon_checkbox">
+          <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon} px-2'></i>".html_safe %>
+        </label>
+      <% end %>
+      <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
+      <%= f.association :tags,
+                  as: :check_boxes,
+                  input_html: { class: "tag-selector" },
+                  item_wrapper_class: 'tag-item' %>
+      <%= f.input :tag_list, label: "Add your tags (separated by a coma)" %>
+      <div class="d-flex justify-content-between px-5">
+        <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
+        <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
+      </div>
+      <%= f.input :comments %>
+      <%= f.input :photo, as: :file %>
+      <div class="row justify-content-center p-3">
+        <%= f.submit "Save", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

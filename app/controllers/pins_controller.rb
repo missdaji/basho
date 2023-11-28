@@ -50,7 +50,8 @@ class PinsController < ApplicationController
     if @pin.save
       tags = params[:pin][:tag_ids]
       tags.each do |tag|
-        new_tag = ActsAsTaggableOn::Tag.where(id: tag.to_i)
+        # next if tag.blank?
+        new_tag = ActsAsTaggableOn::Tag.find_by(name: tag)
         @pin.tag_list.add(new_tag)
         @pin.save
       end
