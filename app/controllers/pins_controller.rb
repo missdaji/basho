@@ -2,6 +2,16 @@ class PinsController < ApplicationController
   def index
     @pins = Pin.all
     @filters_list = %i[view query sort_by visited]
+    ## Default Location: Le Wagon Tokyo
+    # @here = [35.6339404, 139.7082188]
+    ## end of Default
+    if params["lat"] == nil
+      ## Default Location: Le Wagon Tokyo
+      @here = [35.6339404, 139.7082188]
+    else
+      @here = params["lat"].to_f, params["lon"].to_f
+    end
+
     if params[:query].present?
       sql_subquery = "name ILIKE :query OR comments ILIKE :query"
       @pins = @pins.where(sql_subquery, query: "%#{params[:query]}%")
@@ -23,9 +33,30 @@ class PinsController < ApplicationController
         lng: pin.longitude,
         marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
       }
+    elsif params[:sort_by] == 'distance'
+      @pins = @pins.to_a.sort_by! do |pin|
+        pin.distance_to(@here)
+      end
+      # raise
+    end
+    if @pins.class == ActiveRecord::Relation
+      @markers = @pins.geocoded.map do |pin|
+        {
+          lat: pin.latitude,
+          lng: pin.longitude,
+          marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
+        }
+      end
+    else
+      @markers = Pin.all.geocoded.map do |pin|
+        {
+          lat: pin.latitude,
+          lng: pin.longitude,
+          marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
+        }
+      end
     end
 
-    @here = params["lat"].to_f, params["lon"].to_f
     # raise
   end
 
