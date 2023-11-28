@@ -1,7 +1,6 @@
 class PinsController < ApplicationController
   def index
     @pins = Pin.all
-    @pins = policy_scope(Pin)
     @filters_list = %i[view query sort_by visited]
     if params[:query].present?
       sql_subquery = "name ILIKE :query OR comments ILIKE :query"
@@ -14,7 +13,10 @@ class PinsController < ApplicationController
       @pins = @pins.where(visited: true)
     elsif params[:visited] == '0'
       @pins = @pins.where(visited: false)
+    elsif params[:tags]
+      @pins = Pin.tagged_with(params[:tags])
     end
+    @pins = policy_scope(@pins)
     @markers = @pins.geocoded.map do |pin|
       {
         lat: pin.latitude,
