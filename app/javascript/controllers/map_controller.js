@@ -6,13 +6,14 @@ export default class extends Controller {
     apiKey: String,
     markers: Array
   }
+  static targets = ["mapbox", "plus"]
 
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
 
 
     this.map = new mapboxgl.Map({
-      container: this.element,
+      container: this.mapboxTarget,
       style: "mapbox://styles/jonna634/clp94ir87000q01re69d2h1xc",
       center: [139.77, 35.68],
       zoom: 10
@@ -36,9 +37,21 @@ export default class extends Controller {
     this.markersValue.forEach((marker) => {
       const customMarker = document.createElement("div")
       customMarker.innerHTML = marker.marker_html
+      const popup = new mapboxgl.Popup().setHTML(marker.info_html)
       new mapboxgl.Marker(customMarker)
       .setLngLat([ marker.lng, marker.lat ])
+      .setPopup(popup)
       .addTo(this.map)
+
+      popup.on('open', (e) => {
+        console.log(e)
+        this.plusTarget.classList.add("d-none")
+      })
+
+      popup.on('close', (e) => {
+        console.log(e)
+        this.plusTarget.classList.remove("d-none")
+      })
     })
   }
 }
