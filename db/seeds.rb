@@ -123,9 +123,9 @@ User.destroy_all
 
 # pitch seeds start here:
 puts "Creating user and pins.."
-file = URI.open("https://i1.sndcdn.com/avatars-000147518379-isxghc-t500x500.jpg")
-user = User.create!(email: "stephanie.didino@gmail.com", password: "testtest", username: "Stéphanie")
-user.avatar.attach(io: file, filename: "stephanie.jpg", content_type: "image/jpg")
+file = URI.open("https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1695723076/rmhisb06nzp6wo17n6l3.jpg")
+user = User.create!(email: "chris@gmail.com", password: "password", username: "Chris")
+user.avatar.attach(io: file, filename: "chris.jpg", content_type: "image/jpg")
 user.save
 
 file = URI.open("https://imageproxy.wolt.com/venue/627b59f13e69a533600fed96/58918384-dbf8-11ec-bc05-52ab4d82f101_______________closeup.jpg")
