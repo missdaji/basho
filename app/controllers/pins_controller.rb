@@ -34,13 +34,17 @@ class PinsController < ApplicationController
   end
 
   def new
-    @pin = Pin.new
+    if params[:name]
+      @pin = Pin.new(name: params[:name], address: params[:address], latitude: params[:latitude], longitude: params[:longitude])
+    else
+      @pin = Pin.new
+    end
     authorize @pin
   end
 
   def create
     @pin = Pin.new(pin_params)
-    # debugger
+    # create address by current location
     if @pin.address.nil?
       @results = Geocoder.search([pin_params[:lat], pin_params[:lon]])
       @pin.address = @results.first.display_name
