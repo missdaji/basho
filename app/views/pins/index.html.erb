@@ -59,15 +59,17 @@
                   :name,
                   :name,
                   include_hidden: false do |b| %>
-                  <div class="d-flex justify-content-start">
+                  <%# <div class="d-flex justify-content-start"> %>
                   <%= b.label class:"tags-show-index" do %>
                     <%= b.check_box + b.text %>
                     <%#= current_user.all_tags.where(name: b.text).count %>
                     <%end%>
-                  </div>
+                  <%# </div> %>
                   <% end %>
+          <div class="d-flex justify-content-between">
           <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
           <%= submit_tag "X Reset", name: "", class: "btn btn-primary" %>
+          </div>
         <% end %>
         <div class="d-flex justify-content-center pt-2 gap-2">
           <div>
