@@ -15,6 +15,15 @@
   color: white;
 }
 
+.btn-visited {
+  background-color: $dark-green;
+  opacity: 1;
+  color: white;
+  padding: 0.1rem 0.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
 .btn-secondary {
   border-radius: 10px;
   font-size: 1.2rem;
@@ -69,7 +78,7 @@
 .crayola-pink {
   background-color: #ff3b6aff;
 }
-  
+
 .inline > label.form-check-label.collection_radio_buttons {
   color: black !important;
 }

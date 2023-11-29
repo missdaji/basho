@@ -40,49 +40,51 @@
 
 <%# OFF-CANVAS FILTER SIDEBAR %>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-      <%# <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <div class="offcanvas-header">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div> %>
+      </div>
       <div class="offcanvas-body">
         <div>
 <%# FILTERS %>
           <div class="" data-filters-target="filtersCard">
-      <div class="px-2 pt-2">
-        <%= form_with url: pins_path, method: :get do |f| %>
-          <%= f.text_field :query,
-            # params[:query],
-            class: "form-control",
-            placeholder: "Search" %>
-          <%= f.collection_check_boxes :tags,
-                  current_user.tags,
-                  :name,
-                  :name,
-                  include_hidden: false do |b| %>
-                  <%# <div class="d-flex justify-content-start"> %>
-                  <%= b.label class:"tags-show-index" do %>
-                    <%= b.check_box + b.text %>
-                    <%#= current_user.all_tags.where(name: b.text).count %>
-                    <%end%>
-                  <%# </div> %>
-                  <% end %>
-          <div class="d-flex justify-content-between">
-          <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-          <%= submit_tag "X Reset", name: "", class: "btn btn-primary" %>
-          </div>
-        <% end %>
-        <div class="d-flex justify-content-center pt-2 gap-2">
+      <div class="px-2">
+        <div class="d-flex justify-content-center gap-3">
           <div>
             <%= link_to pins_path_with_params(visited: 1), data: {"controller": "geolocate"} do  %>
-              <%= button_tag "Visited", class: "btn btn-primary" %>
+              <%= button_tag "Visited", class: "btn btn-visited" %>
             <% end %>
           </div>
           <div>
             <%= link_to pins_path_with_params(visited: 0), data: {"controller": "geolocate"} do  %>
-              <%= button_tag "Not visited", class: "btn btn-primary" %>
+              <%= button_tag "Not visited", class: "btn btn-visited" %>
             <% end %>
           </div>
         </div>
+        <div class="my-2">
+        <%= form_with url: pins_path, method: :get do |f| %>
+          <%= f.text_field :query,
+            # params[:query],
+            class: "form-control my-3",
+            placeholder: "Search" %>
+          <%= f.collection_check_boxes :tags,
+                  current_user.tags.order(:name),
+                  :name,
+                  :name,
+                  include_hidden: false do |b| %>
+                  <%# <div class="d-flex justify-content-start"> %>
+                  <p class="m-0"><%= b.label class:"tags-show-index" do %>
+                    <span class="me-3"><%= current_user.tags.pluck(:name).count(b.text) %></span><%= b.check_box + b.text %>
+                    <%#= current_user.all_tags.where(name: b.text).count %>
+                    <%end%></p>
+                  <%# </div> %>
+                  <% end %>
+                  </div>
+          <div class="d-flex justify-content-between">
+          <%= submit_tag " Search ", name: "", class: "btn btn-primary" %>
+          <%= submit_tag " X Reset ", name: "", class: "btn btn-secondary" %>
+          </div>
+        <% end %>
+
       </div>
     </div>
 <%# END FILTERS %>
