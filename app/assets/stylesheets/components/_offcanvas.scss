@@ -47,7 +47,7 @@
       @include transition(var(--#{$prefix}offcanvas-transition));
 
       &.offcanvas-start {
-        top: 0;
+        top: 60px;
         left: 0;
         width: var(--#{$prefix}offcanvas-width);
         border-right: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
