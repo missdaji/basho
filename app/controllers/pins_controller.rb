@@ -61,7 +61,11 @@ class PinsController < ApplicationController
   end
 
   def new
-    @pin = Pin.new
+    if params[:name]
+      @pin = Pin.new(name: params[:name], address: params[:address], latitude: params[:latitude], longitude: params[:longitude])
+    else
+      @pin = Pin.new
+    end
     authorize @pin
   end
 
