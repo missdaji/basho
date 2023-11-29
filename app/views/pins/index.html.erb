@@ -62,6 +62,7 @@
                   <div class="d-flex justify-content-start">
                   <%= b.label class:"tags-show-index" do %>
                     <%= b.check_box + b.text %>
+                    <%#= current_user.all_tags.where(name: b.text).count %>
                     <%end%>
                   </div>
                   <% end %>
