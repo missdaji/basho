@@ -2,6 +2,11 @@
 	height: 40px;
 	width: 40px;
   background-color: $persian-blue;
+  z-index: 1200;
+  right: 10px;
+  top: 40px;
+  position: fixed;
+  cursor: pointer;
 }
 
 .mapboxgl-ctrl button.mapboxgl-ctrl-geolocate.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {

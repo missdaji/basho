@@ -1,7 +1,19 @@
 .btn-filters i {
   background-color: $persian-blue;
   color: white;
-  border-radius: 10px;
+  border-radius: 0 10px 10px 0;
   padding: 12px;
   font-size: 1.2rem;
+}
+
+.filters-map {
+  top: 50px;
+  z-index: 500;
+}
+
+.filters-list {
+  top: 100px;
+  z-index: 500;
+  background-color: $baby-powder;
+  padding-bottom: 5px;
 }
