@@ -42,3 +42,38 @@
   left: 0;
   z-index: 1;
 }
+
+.btn-sort i {
+  background-color: $persian-blue;
+  color: white;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1.2rem;
+}
+
+.btn-primary-tag {
+  background-color: #ff3b6aff;
+  opacity: 0.9;
+  color: white;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+
+.btn-primary-tag:hover {
+  background-color: #ff3b6aff;
+  color: white;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+
+.crayola-pink {
+  background-color: #ff3b6aff;
+}
+  
+.inline > label.form-check-label.collection_radio_buttons {
+  color: black !important;
+}
+
+.inline > label.form-check-input.is-valid.radio_buttons.optional {
+  background-color: black !important;
+}

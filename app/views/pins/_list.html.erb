@@ -1,0 +1,34 @@
+<div class="list-container">
+    <main class="px-4">
+      <div class="row justify-content-center list-margin">
+        <% @pins.each do |pin| %>
+          <div class="col-lg-auto">
+            <div class="col-12 col-md-6 card mb-9 shadow my-2 p-0" >
+              <div class="card-product">
+                <% if pin.photo.attached? %>
+                  <%= cl_image_tag pin.photo.key, crop: :fill %>
+                <% else %>
+                  <%= image_tag "https://res.cloudinary.com/dcqlc61be/image/upload/v1701220410/basho-placeholder_pewcwm.jpg", class: "", alt: "Card image cap", height: "60", crop: :fill %>
+                <% end %>
+                <div class="card-product-infos">
+                  <p class="card-text"><%= number_with_precision(pin.distance_to(@here), precision: 2) %> km</p>
+                  <h5 class="card-title"><%= truncate(pin.name, :length => 15) %></h5>
+                  <p class="card-text"><%= truncate(pin.address, :length => 25) %></p>
+
+                  <ul class="p-1">
+                  <% card_tags = pin.tag_list %>
+                  <% card_tags.each do |card_tag| %>
+                  <div class="tags-show-card">
+                  <li><%= card_tag %></li></label>
+                  </div>
+                  <% end %>
+                  </ul>
+                </div>
+                <%= link_to '', pin_path(pin.id), class: 'card-link' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </main>
+  </div>

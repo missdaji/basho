@@ -89,7 +89,7 @@
 // }
 
 .tag-selector-new {
-  position: absolute;
+  // position: absolute;
   transform: scale(0);
 }
 
@@ -103,10 +103,9 @@
   opacity: 0.5;
   color: white;
   border: 1px solid #FF0B67;
-  margin-right: 0.6rem;
+  margin-right: 0.8rem;
   margin-bottom: 0.4rem;
   margin-top: 0.4rem;
-  text-decoration: none;
 }
 
 .tag-selector-new:checked+label {
@@ -125,4 +124,25 @@
   background-color: #343192;
   color: #ECEAFF;
   border: 1px solid #7E73FF;
+}
+
+.tags-show-index {
+  display: inline-block;
+  font-size: 1rem;
+  border-radius: 50rem;
+  padding: 0.1rem 0.5rem;
+  background-color: #FF0B67;
+  opacity: 0.6;
+  color: white;
+  border: 1px solid #FF0B67;
+  margin-right: 0.6rem;
+
+  &:has(input:checked){
+    background-color: #FF0B67;
+    border: 1px solid #FF0B67;
+    opacity: 1;
+  }
+  input{
+    display: none;
+  }
 }

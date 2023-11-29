@@ -14,7 +14,7 @@ class Pin < ApplicationRecord
   validates :private, inclusion: [true, false]
 
   geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
+  after_validation :geocode, if: :will_save_change_to_address? && :if_not_geocoded?
   ICONS = {
     'utensils' => "#E63946",
     'ice-cream' => "#FDB9C8",
@@ -32,9 +32,12 @@ class Pin < ApplicationRecord
     'gamepad' => "#00FF00",
     'dice' => "#DC143C"
   }
-
   def blank_stars
-    5 - rating
+    if rating.nil?
+      5
+    else
+      5 - rating
+    end
   end
 
 
@@ -43,6 +46,10 @@ class Pin < ApplicationRecord
   def set_default
     self.visited ||= false
     self.private ||= false
+  end
+
+  def if_not_geocoded?
+    self.longitude.nil? && self.latitude.nil?
   end
 
 end

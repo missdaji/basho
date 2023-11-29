@@ -2,7 +2,6 @@
   justify-content: space-between;
   background: $persian-blue;
   vertical-align: middle;
-  margin-top: -5px;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -11,6 +10,7 @@
 
 .navbar-lewagon .navbar-brand img {
   width: 120px;
+  margin-left: 5px;
 }
 
 .nav-link {
@@ -20,8 +20,14 @@
 }
 
 .navbar {
-  height: 65px;
+  height: 60px;
   z-index: 1000;
+  justify-content: center;
+  --bs-navbar-padding-y: 0;
+}
+
+.nav-item {
+  justify-content: center;
 }
 
 #username-navbar {
