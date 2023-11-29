@@ -1,6 +1,6 @@
 <div class="col-12 col-sm-6">
   <div class="p-3" data-controller="toggle-form">
-    <h1>Edit pin</h1>
+    <h1>Edit your place</h1>
     <br>
     <%= simple_form_for(@pin) do |f| %>
       <%= f.input :name %>
@@ -46,17 +46,19 @@
                   wrapper_html: { data: {color_target: "tags"} },
                   item_wrapper_class: 'tag-item' %>
                   <!-- Button trigger modal -->
-        <div class="row justify-content-center p-3">
-        <div class="row justify-content-center px-5">
-          <button type="button" class="btn btn-primary-tag" data-toggle="modal" data-target="#createtag">New tag</button>
-        </div>
+        <div class="row justify-content-center p-2">
+          <div class="col-12 col-lg-6">
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary-tag" data-toggle="modal" data-target="#createtag">New tag</button>
+            </div>
+          </div>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="createtag" tabindex="-1" role="dialog" aria-labelledby="createtag" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="createtag">Modal title</h5>
+                <h5 class="modal-title" id="createtag">New tag</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
