@@ -89,7 +89,7 @@
 // }
 
 .tag-selector-new {
-  position: absolute;
+  // position: absolute;
   transform: scale(0);
 }
 
@@ -103,10 +103,9 @@
   opacity: 0.5;
   color: white;
   border: 1px solid #FF0B67;
-  margin-right: 0.6rem;
+  margin-right: 0.8rem;
   margin-bottom: 0.4rem;
   margin-top: 0.4rem;
-  text-decoration: none;
 }
 
 .tag-selector-new:checked+label {
