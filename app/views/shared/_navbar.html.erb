@@ -1,5 +1,5 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon fixed-top">
-  <div class="container-fluid">
+  <div class="container-fluid align-items-center mx-2">
   <%# LOGO %>
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "basho-logo.png" %>
@@ -7,7 +7,7 @@
   <%# LOGO END %>
 
   <%# USER AREA %>
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
       <% if user_signed_in? %>
         <div class="nav-item">
           <%= link_to current_user.username, "#", id: "username-navbar", class: "nav-link" %>

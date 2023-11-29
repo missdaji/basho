@@ -11,6 +11,8 @@
     border-radius: 15px;
   }
 
+
+
   // map view
   &:not(.show-list) {
     .list-container {
@@ -20,6 +22,12 @@
     .btn-toggle-map {
       color: $baby-powder;
       background-color: $persian-blue;
+    }
+
+    .filters-map {
+      top: 50px;
+      z-index: 450;
+      background: none;
     }
   }
 
@@ -31,11 +39,31 @@
 
     .list-container {
       display: block;
+      background-color: $baby-powder;
     }
 
     .btn-toggle-list {
       color: $baby-powder;
       background-color: $persian-blue;
     }
+
+    .filters-map {
+      top: 50px;
+      z-index: 450;
+      background-color: $baby-powder;
+      padding-bottom: 5px;
+    }
   }
 }
+
+.list-margin {
+  margin-top: 100px;
+}
+
+// .map-container {
+//   z-index: 550;
+// }
+
+// .list-container {
+//   background-color: $baby-powder;
+// }
