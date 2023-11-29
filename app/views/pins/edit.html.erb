@@ -9,31 +9,19 @@
       <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
       <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
       <hr>
-      <% collection = [
-        'utensils',
-        'burger',
-        'bacon',
-        'pizza-slice',
-        'bowl-food',
-        'carrot',
-        'ice-cream',
-        'mug-hot',
-        'martini-glass',
-        'beer-mug-empty',
-        'bag-shopping',
-        'tree',
-        'landmark',
-        'book',
-        'music',
-        'gamepad',
-        'dice'
-        ] %>
+      <br>
       <p>Icon</p>
-      <% collection.each do |icon| %>
+      <% Pin::ICONS.each do |icon, color| %>
         <label class="icon_checkbox">
-          <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon} px-2'></i>".html_safe %>
+          <input type="radio" value=<%= icon %> name="pin[icon]">
+          <span class="fa-stack" style="vertical-align: top;">
+            <i class="fa-solid fa-location-pin fa-stack-2x" style="color: <%= color %>;"></i>
+            <i class="fa-solid fa-<%= icon %> fa-stack-1x fa-inverse" style="font-size: 22px; bottom: 4px;"></i>
+          </span>
         </label>
       <% end %>
+      <div class="py-2">
+      </div>
       <div class="py-3">
       <%= f.input :rating, collection: [1, 2, 3, 4, 5], as: :radio_buttons, item_wrapper_class: 'inline', input_html: { class: "" } %>
       </div>
@@ -77,11 +65,13 @@
         </div>
         </div>
         <hr>
-      <div class="row justify-content-center px-3">
-            <div class="d-flex justify-content-between py-3">
+      <div class="row justify-content-center">
+        <div class="col-11 col-lg-6">
+          <div class="d-flex justify-content-between py-3 pr-3">
         <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
         <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
-      </div>
+          </div>
+        </div>
       </div>
       <hr>
       <%= f.input :comments %>
