@@ -8,6 +8,7 @@
       <%= f.input :use_current_location, as: :boolean, input_html: { class: "toggle", :data => { action: "click->toggle-form#showAddress" } } %>
       <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
       <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
+      <hr>
       <% collection = [
         'utensils',
         'ice-cream',
@@ -34,6 +35,7 @@
       <div class="py-3">
       <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
       </div>
+      <hr>
       <div data-controller="color">
       <%= f.association :tags,
                   as: :check_boxes,
@@ -43,7 +45,9 @@
                   item_wrapper_class: 'tag-item' %>
                   <!-- Button trigger modal -->
         <div class="row justify-content-center p-3">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createtag">Create your tag</button>
+        <div class="row justify-content-center px-5">
+          <button type="button" class="btn btn-primary-tag" data-toggle="modal" data-target="#createtag">New tag</button>
+        </div>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="createtag" tabindex="-1" role="dialog" aria-labelledby="createtag" aria-hidden="true">
@@ -68,10 +72,14 @@
           </div>
         </div>
         </div>
-      <div class="d-flex justify-content-between px-5">
+        <hr>
+      <div class="row justify-content-center px-3">
+            <div class="d-flex justify-content-between py-3">
         <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
         <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
       </div>
+      </div>
+      <hr>
       <%= f.input :comments %>
       <%= f.input :photo, as: :file %>
       <div class="row justify-content-center p-3">

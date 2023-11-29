@@ -1,0 +1,28 @@
+<div class="search_form p-3 mb-4">
+  <div class="text-center m-4">
+    <p>Type the name or address of a place you'd like to add to your map</p>
+  </div>
+  <div class="d-flex justify-content-center m-4">
+    <%= form_with url: search_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+            params[:query],
+            placeholder: "Name or address"
+        %>
+      <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<div>
+  <% if params[:query] %>
+    <% @info.each do |place| %>
+      <div class="card shadow m-3 p-4">
+        <h5><%= place["name"] %></h5>
+        <%= place["formatted_address"] %>
+        <% place["geometry"]["location"]["lat"] %>
+        <% place["geometry"]["location"]["lng"] %>
+        <%= link_to '', new_pin_path(name: place["name"], address: place["formatted_address"], latitude: place["geometry"]["location"]["lat"], longitude: place["geometry"]["location"]["lng"]), class: 'card-link' %>
+      </div>
+    <% end %>
+  <% else %>
+  <% end %>
+</div>
