@@ -9,48 +9,51 @@
     <% end %>
   </div>
   <%# END MAP/LIST TOGGLE BUTTON %>
-  <div data-controller="filters" class="filters-map fixed-top">
-    <%# FILTER BUTTON %>
-    <div class="d-flex justify-content-between mt-3">
-      <div class="btn-filters" data-action="click->filters#showFilters">
+
+  <div class="filters-map fixed-top">
+    <div class="d-flex justify-content-between mt-3 ms-0">
+      <button class="btn-filters" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
         <i class="fa-solid fa-filter" style="color: #ffffff;"></i>
-      </div>
+      </button>
+      <%# <div class="btn-sort list-container mx-2"> %>
+        <%# <%= link_to pins_path_with_params(view: 'list'), data: {"controller": "geolocate"} do  %>
+          <%# <i class="fa-solid fa-location-crosshairs" style="color: #ffffff;"></i> %>
+        <%# <% end %>
+      <%# </div> %>
+        <%# </div> %>
+    </div>
+
+
+  <div data-controller="filters" class="filters-map fixed-top">
+<%# FILTER BUTTON %>
+    <div class="d-flex justify-content-between list-container mt-3">
+      <button class="btn-filters" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <i class="fa-solid fa-filter" style="color: #ffffff;"></i>
+      </button>
       <div class="btn-sort list-container mx-2">
-        <%= link_to pins_path_with_params(view: 'list'), data: {"controller": "geolocate"} do  %>
+        <%= link_to pins_path_with_params(view: 'list'), data: {"controller": "geolocate"} do %>
           <i class="fa-solid fa-location-crosshairs" style="color: #ffffff;"></i>
         <% end %>
       </div>
     </div>
-    <%# END FILTER BUTTON %>
-    <%# SORTING %>
-    <div class="d-flex justify-content-end mx-2">
-      <div class="d-flex my-auto align-items-end pt-2 gap-2">
-        <p class="my-auto list-container">Sort by:</p>
-        <div class="btn-sort list-container" >
-          <%= link_to pins_path_with_params(sort_by: :name), data: {"controller": "geolocate"} do  %>
-            <i class="fa-solid fa-arrow-down-a-z" style="color: #ffffff;"></i>
-          <% end %>
-        </div>
-        <div class="btn-sort list-container" >
-          <%= link_to pins_path_with_params(sort_by: :date), data: {"controller": "geolocate"} do  %>
-            <i class="fa-solid fa-calendar-plus" style="color: #ffffff;"></i>
-          <% end %>
-        </div>
-        <div class="btn-sort list-container" >
-          <%= link_to pins_path_with_params(sort_by: :distance), data: {"controller": "geolocate"} do  %>
-            <i class="fa-solid fa-compass-drafting" style="color: #ffffff;"></i>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <%# END SORTING %>
-    <div class="d-none" data-filters-target="filtersCard">
-      <div class="px-4 pt-2">
+<%# END FILTER BUTTON %>
+
+<%# OFF-CANVAS FILTER SIDEBAR %>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <%# <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div> %>
+      <div class="offcanvas-body">
+        <div>
+<%# FILTERS %>
+          <div class="" data-filters-target="filtersCard">
+      <div class="px-2 pt-2">
         <%= form_with url: pins_path, method: :get do |f| %>
           <%= f.text_field :query,
             # params[:query],
             class: "form-control",
-            placeholder: "Search by name or comment" %>
+            placeholder: "Search" %>
           <%= f.collection_check_boxes :tags,
                   current_user.tags,
                   :name,
@@ -79,6 +82,36 @@
         </div>
       </div>
     </div>
+<%# END FILTERS %>
+        </div>
+      </div>
+    </div>
+  </div>
+<%# END OFF-CANVAS FILTER SIDEBAR %>
+
+<%# SORTING %>
+    <div class="d-flex justify-content-end mx-2">
+      <div class="d-flex my-auto align-items-end pt-2 gap-2">
+        <p class="my-auto list-container">Sort by:</p>
+        <div class="btn-sort list-container" >
+          <%= link_to pins_path_with_params(sort_by: :name), data: {"controller": "geolocate"} do  %>
+            <i class="fa-solid fa-arrow-down-a-z" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+        <div class="btn-sort list-container" >
+          <%= link_to pins_path_with_params(sort_by: :date), data: {"controller": "geolocate"} do  %>
+            <i class="fa-solid fa-calendar-plus" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+        <div class="btn-sort list-container" >
+          <%= link_to pins_path_with_params(sort_by: :distance), data: {"controller": "geolocate"} do  %>
+            <i class="fa-solid fa-compass-drafting" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<%# END SORTING %>
+
   </div>
   <div
     data-controller="map"
