@@ -5,22 +5,26 @@
       <i class='fa-solid fa-<%= pin.icon %> popup-icon2'></i>
     </div>
   </div>
-  <div style="padding: 5px;">
-    <div class="card-body">
-      <blockquote class="blockquote mb-">
-        <p>
-          <h2 class="card-title"><%= pin.name %></h2>
-        </p>
-        <p class="border-bottom border-top border-dark" style="font-size: 15px;"><%= pin.address %></p>
-      </blockquote>
+  <div class="bg-white p-4">
+    <h2><%= pin.name %></h2>
+    <p><%= pin.address %></p>
+    <div class="d-flex justify-content-flex-start gap-1">
+      <% tags = pin.tag_list %>
+      <% tags.each do |tag| %>
+        <div class="tags"><%= tag %></div>
+      <% end %>
     </div>
-    <div>
-      <ul class="p-3">
-        <% tags = pin.tag_list %>
-        <% tags.each do |tag| %>
-          <li class="tags"><%= tag %></li>
+    <div class="d-flex justify-content-end gap-3">
+      <div class="btn-sort">
+        <%= link_to pin_path(pin.id) do %>
+          <i class="fa-solid fa-eye"></i>
         <% end %>
-      </ul>
+      </div>
+      <div class="btn-sort">
+        <%= link_to edit_pin_path(pin.id) do %>
+          <i class="fa-solid fa-pencil"></i>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
