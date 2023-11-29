@@ -65,3 +65,11 @@
   border-radius: 10px;
   font-size: 1.2rem;
 }
+
+.inline > label.form-check-label.collection_radio_buttons {
+  color: black !important;
+}
+
+.inline > label.form-check-input.is-valid.radio_buttons.optional {
+  background-color: black !important;
+}
