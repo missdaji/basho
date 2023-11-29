@@ -1,4 +1,8 @@
 .icon_checkbox {
+  padding: 4px 0;
   input[type=radio] { display: none }
-  &:has(input:checked) { color: #ff3b6aff}
+  &:has(input:checked) {
+    background-color: rgba(68, 63, 166, 0.25);
+    border-radius: 50px;
+    }
 }
