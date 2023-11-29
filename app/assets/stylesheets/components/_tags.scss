@@ -125,3 +125,24 @@
   color: #ECEAFF;
   border: 1px solid #7E73FF;
 }
+
+.tags-show-index {
+  display: inline-block;
+  font-size: 1rem;
+  border-radius: 50rem;
+  padding: 0.1rem 0.5rem;
+  background-color: #FF0B67;
+  opacity: 0.6;
+  color: white;
+  border: 1px solid #FF0B67;
+  margin-right: 0.6rem;
+
+  &:has(input:checked){
+    background-color: #FF0B67;
+    border: 1px solid #FF0B67;
+    opacity: 1;
+  }
+  input{
+    display: none;
+  }
+}

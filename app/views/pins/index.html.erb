@@ -56,10 +56,12 @@
                   :name,
                   :name,
                   include_hidden: false do |b| %>
-            <%= b.label class:"tags-show" do %>
-              <%= b.check_box + b.text %>
-            <%end%>
-          <% end %>
+                  <div class="d-flex justify-content-start">
+                  <%= b.label class:"tags-show-index" do %>
+                    <%= b.check_box + b.text %>
+                    <%end%>
+                  </div>
+                  <% end %>
           <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
         <% end %>
         <div class="d-flex justify-content-center pt-2 gap-2">
