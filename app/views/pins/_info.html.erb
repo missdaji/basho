@@ -1,23 +1,6 @@
-<!--<section class="place-info">
-  <div class="bar-image popup-photo">
-    <%= cl_image_tag pin.photo.key, crop: :fill %>
-  </div>
-  <div class="bar-details">
-    <h1><%= pin.name %></h1>
-    <p><%= pin.address %></p>
-    <div class="justify-content-end">
-      <% pin.rating.to_i.times do %>
-        <i class="fa-solid fa-star"></i>
-      <% end %>
-      <% pin.blank_stars.times do %>
-        <i class="fa-regular fa-star"></i>
-      <% end %>
-    </div>
-  </div>
-</section> -->
 <div>
   <div class="popup-photo">
-    <img src="<%= cl_image_path pin.photo.key%>" style="object-fit: cover; width: 100vh;">
+    <img src="<%= pin.photo.attached? ? cl_image_path(pin.photo.key) : "https://res.cloudinary.com/dcqlc61be/image/upload/v1701220410/basho-placeholder_pewcwm.jpg"%>" style="object-fit: cover; width: 100vh;">
     <div class="popup-icon">
       <i class='fa-solid fa-<%= pin.icon %> popup-icon2'></i>
     </div>
