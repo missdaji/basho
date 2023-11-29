@@ -67,10 +67,12 @@
         </div>
       </div>
       <hr>
-      <div class="row justify-content-center px-3">
-        <div class="d-flex justify-content-between py-3">
-          <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
-          <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
+      <div class="row justify-content-center">
+        <div class="col-11 col-lg-6">
+          <div class="d-flex justify-content-between py-3 pr-3">
+            <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
+            <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
+          </div>
         </div>
       </div>
       <hr>
