@@ -30,7 +30,12 @@ class Pin < ApplicationRecord
     'book' => "#800000",
     'music' => "#800080",
     'gamepad' => "#00FF00",
-    'dice' => "#DC143C"
+    'dice' => "#DC143C",
+    'bowl-food' => "#A67B5B",
+    'bacon' => "#D2691E",
+    'fish' => "#3FA9F5",
+    'prescription-bottle-medical' => "#0CBABA",
+    'cart-shopping' => "#FF1C00"
   }
   def blank_stars
     if rating.nil?
