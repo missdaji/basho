@@ -1,7 +1,6 @@
 class PinsController < ApplicationController
   def index
     @pins = Pin.all
-    @pins = policy_scope(Pin)
     @filters_list = %i[view query sort_by visited]
     ## Default Location: Le Wagon Tokyo
     # @here = [35.6339404, 139.7082188]
@@ -28,26 +27,30 @@ class PinsController < ApplicationController
       @pins = @pins.to_a.sort_by! do |pin|
         pin.distance_to(@here)
       end
+    elsif params[:tags]
+      @pins = Pin.tagged_with(params[:tags])
       # raise
     end
+    @pins = policy_scope(@pins)
     if @pins.class == ActiveRecord::Relation
       @markers = @pins.geocoded.map do |pin|
         {
           lat: pin.latitude,
           lng: pin.longitude,
-          marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
+          marker_html: render_to_string(partial: "marker", locals: { pin: pin }), # , locals: {pin: pin}
+          info_html: render_to_string(partial: "info", locals: { pin: pin }) # , locals: {pin: pin}
         }
       end
     else
-      @markers = Pin.all.geocoded.map do |pin|
+      @markers = @pins.geocoded.map do |pin|
         {
           lat: pin.latitude,
           lng: pin.longitude,
-          marker_html: render_to_string(partial: "marker", locals: { pin: pin }) # , locals: {pin: pin}
+          marker_html: render_to_string(partial: "marker", locals: { pin: pin }), # , locals: {pin: pin}
+          info_html: render_to_string(partial: "info", locals: { pin: pin }) # , locals: {pin: pin}
         }
       end
     end
-
     # raise
   end
 
@@ -65,9 +68,11 @@ class PinsController < ApplicationController
   def create
     @pin = Pin.new(pin_params)
     # debugger
-    if @pin.address.nil?
+    if @pin.address == ""
       @results = Geocoder.search([pin_params[:lat], pin_params[:lon]])
       @pin.address = @results.first.display_name
+      @pin.latitude = pin_params[:lat]
+      @pin.longitude = pin_params[:lon]
     end
     @pin.user = current_user
     authorize @pin
