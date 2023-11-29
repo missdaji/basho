@@ -14,7 +14,7 @@ class Pin < ApplicationRecord
   validates :private, inclusion: [true, false]
 
   geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
+  after_validation :geocode, if: :will_save_change_to_address? && :if_not_geocoded?
 
   def blank_stars
     5 - rating
@@ -26,6 +26,10 @@ class Pin < ApplicationRecord
   def set_default
     self.visited ||= false
     self.private ||= false
+  end
+
+  def if_not_geocoded?
+    self.longitude.nil? && self.latitude.nil?
   end
 
 end
