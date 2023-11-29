@@ -1,3 +1,6 @@
 <div class="marker">
-  <i class="fa-solid fa-<%= pin.icon %>" style="font-size: 16px;"></i>
+  <span class="fa-stack fa-2x">
+    <i class="fa-solid fa-location-pin fa-stack-2x" style="color: <%= Pin::ICONS[pin.icon] %>;"></i>
+    <i class="fa-solid fa-<%= pin.icon %> fa-stack-1x" style="font-size: 16px; color: white;"></i>
+  </span>
 </div>

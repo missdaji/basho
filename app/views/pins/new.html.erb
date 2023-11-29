@@ -6,35 +6,20 @@
       <%= f.input :name %>
       <%= f.input :address, input_html: { id: "showAddress"} %>
       <%= f.input :longitude, as: "hidden" %>
-      <%= f.input :latitude, as: "hidden" %>
+      <%= f.input :latitude, as: "hidden" %>                   
       <%= f.input :use_current_location, as: :boolean, input_html: { class: "toggle", :data => { action: "click->toggle-form#showAddress" } } %>
       <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
       <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
       <hr>
       <br>
-      <% collection = [
-        'utensils',
-        'burger',
-        'bacon',
-        'pizza-slice',
-        'bowl-food',
-        'carrot',
-        'ice-cream',
-        'mug-hot',
-        'martini-glass',
-        'beer-mug-empty',
-        'bag-shopping',
-        'tree',
-        'landmark',
-        'book',
-        'music',
-        'gamepad',
-        'dice'
-        ] %>
       <p>Icon</p>
-      <% collection.each do |icon| %>
+      <% Pin::ICONS.each do |icon, color| %>
         <label class="icon_checkbox">
-          <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon} px-2'></i>".html_safe %>
+          <input type="radio" value=<%= icon %> name="pin[icon]">
+          <span class="fa-stack" style="vertical-align: top;">
+            <i class="fa-solid fa-location-pin fa-stack-2x" style="color: <%= color %>;"></i>
+            <i class="fa-solid fa-<%= icon %> fa-stack-1x fa-inverse" style="font-size: 22px; bottom: 4px;"></i>
+          </span>
         </label>
       <% end %>
       <div class="py-2">
