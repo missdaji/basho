@@ -2,14 +2,16 @@
   <div class="p-3" data-controller="toggle-form">
     <h1>Add a new place</h1>
     <br>
-      <%= simple_form_for(@pin) do |f| %>
-        <%= f.input :name %>
-        <%= f.input :address, input_html: { id: "showAddress"} %>
-        <%= f.input :use_current_location, as: :boolean, input_html: { class: "toggle", :data => { action: "click->toggle-form#showAddress" } } %>
-        <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
-        <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
-        <hr>
-        <br>
+    <%= simple_form_for(@pin) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :address, input_html: { id: "showAddress"} %>
+      <%= f.input :longitude, as: "hidden" %>
+      <%= f.input :latitude, as: "hidden" %>
+      <%= f.input :use_current_location, as: :boolean, input_html: { class: "toggle", :data => { action: "click->toggle-form#showAddress" } } %>
+      <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
+      <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
+      <hr>
+      <br>
       <% collection = [
         'utensils',
         'burger',
@@ -29,19 +31,19 @@
         'gamepad',
         'dice'
         ] %>
-        <p>Icon</p>
-        <% collection.each do |icon| %>
-          <label class="icon_checkbox">
-            <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon} px-2'></i>".html_safe %>
-          </label>
-        <% end %>
-        <div class="py-2">
-        </div>
-        <div class="py-3">
+      <p>Icon</p>
+      <% collection.each do |icon| %>
+        <label class="icon_checkbox">
+          <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon} px-2'></i>".html_safe %>
+        </label>
+      <% end %>
+      <div class="py-2">
+      </div>
+      <div class="py-3">
         <%= f.input :rating, collection: [1, 2, 3, 4, 5], as: :radio_buttons, item_wrapper_class: 'inline' %>
-        </div>
-        <hr>
-        <div data-controller="color">
+      </div>
+      <hr>
+      <div data-controller="color">
         <%= f.association :tags,
                   as: :check_boxes,
                   collection: current_user.tag_pins,
@@ -51,7 +53,7 @@
         <!-- Button trigger modal -->
         <div class="row justify-content-center p-3">
           <div class="row justify-content-center px-5">
-          <button type="button" class="btn btn-primary-tag" data-toggle="modal" data-target="#createtag">New tag</button>
+            <button type="button" class="btn btn-primary-tag" data-toggle="modal" data-target="#createtag">New tag</button>
           </div>
         </div>
         <!-- Modal -->
@@ -76,18 +78,18 @@
             </div>
           </div>
         </div>
+      </div>
+      <hr>
+      <div class="row justify-content-center px-3">
+        <div class="d-flex justify-content-between py-3">
+          <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
+          <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
         </div>
-          <hr>
-            <div class="row justify-content-center px-3">
-            <div class="d-flex justify-content-between py-3">
-              <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
-              <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
-              </div>
-        </div>
-        <hr>
-        <%= f.input :comments %>
-        <%= f.input :photo, as: :file %>
-        <div class="row justify-content-center p-3">
+      </div>
+      <hr>
+      <%= f.input :comments %>
+      <%= f.input :photo, as: :file %>
+      <div class="row justify-content-center p-3">
         <%= f.submit "Save", class: "btn btn-primary" %>
       </div>
     <% end %>
