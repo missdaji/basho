@@ -6,7 +6,7 @@
 </div>
 <br>
 <div class="px-4">
-  <div class="d-flex justify-content-center align-items-center">
+  <div class="d-flex px-1">
     <div class="show-icon pr-4">
       <%= "<i class='fa-solid fa-#{@pin.icon}'></i>".html_safe %>
     </div>
@@ -15,7 +15,7 @@
       <h5><%= @pin.address %></h5>
     </div>
   </div>
-  <ul class="p-3">
+  <ul class="px-1 py-4">
     <% @pin.user_id = current_user %>
     <% tags = @pin.tag_list %>
     <% tags.each do |tag| %>

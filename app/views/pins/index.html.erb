@@ -18,26 +18,46 @@
         <% end %>
       </div>
     </div>
+<%# SORTING %>
+    <div class="d-flex justify-content-end mx-2">
+      <div class="d-flex my-auto align-items-end pt-2 gap-2">
+        <p class="my-auto list-container">Sort by:</p>
+        <div class="btn-filters list-container" >
+          <%= link_to pins_path_with_params(sort_by: :name), data: {"controller": "geolocate"} do  %>
+            <i class="fa-solid fa-arrow-down-a-z" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+        <div class="btn-filters list-container" >
+          <%= link_to pins_path_with_params(sort_by: :date), data: {"controller": "geolocate"} do  %>
+            <i class="fa-solid fa-calendar-plus" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+        <div class="btn-filters list-container" >
+          <%= link_to pins_path_with_params(sort_by: :distance), data: {"controller": "geolocate"} do  %>
+            <i class="fa-solid fa-compass-drafting" style="color: #ffffff;"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<%# END SORTING %>
     <div class="d-none" data-filters-target="filtersCard">
       <div class="px-4 pt-2">
-        <%= form_with url: pins_path, method: :get, class: "d-flex" do %>
-          <%= text_field_tag :query,
-            params[:query],
+        <%= form_with url: pins_path, method: :get do |f| %>
+          <%= f.text_field :query,
+            # params[:query],
             class: "form-control",
             placeholder: "Search by name or comment" %>
-
+          <%= f.collection_check_boxes :tags,
+                  current_user.tags,
+                  :name,
+                  :name,
+                  include_hidden: false do |b| %>
+                  <%= b.label class:"tags-show" do %>
+                    <%= b.check_box + b.text %>
+                    <%end%>
+                  <% end %>
           <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
         <% end %>
-
-        <ul class="p-3">
-        <% tags = current_user.tag_pins %>
-        <% tags.each do |tag| %>
-        <div class="tags-show">
-        <li><%= tag %></li></label>
-        </div>
-        <% end %>
-      </ul>
-
         <div class="d-flex justify-content-center pt-2 gap-2">
           <div>
             <%= link_to pins_path_with_params(visited: 1), data: {"controller": "geolocate"} do  %>
@@ -49,36 +69,29 @@
               <%= button_tag "Not visited", class: "btn btn-primary" %>
             <% end %>
           </div>
+
         </div>
       </div>
     </div>
   </div>
-  <div class="map-container position-fixed" style="width: 100%; height: 850px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-  ></div>
-  <div class="container">
-    <%= link_to new_pin_path(:lat => params[:lat], :lon => params[:lon]), data: {"controller": "get-position"} do %>
-      <button class="btn btn-primary circle-button d-flex fixed-bottom" style="font-size: 50px;">
-        +
-      </button>
-    <% end %>
+  <div
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    <div data-map-target="mapbox" class="map-container position-fixed" style="width: 100%; height: 83%;"
+
+    ></div>
+    <%# <div class="container"> %>
+    <div  data-map-target="plus">
+      <%= link_to new_pin_path(:lat => params[:lat], :lon => params[:lon]), data: {"controller": "get-position"} do %>
+        <button class="btn btn-primary circle-button d-flex" style="font-size: 50px;">
+          +
+        </button>
+      <% end %>
+    </div>
   </div>
   <div class="list-container">
     <main class="px-4">
-      <div class="d-flex justify-content-center pt-2 gap-2">
-        <div>
-          <%= link_to pins_path_with_params(sort_by: :name), data: {"controller": "geolocate"} do  %>
-            <%= button_tag "Sort by name", name: "", class: "btn btn-primary" %>
-          <% end %>
-        </div>
-        <div>
-          <%= link_to pins_path_with_params(sort_by: :date), data: {"controller": "geolocate"} do  %>
-            <%= button_tag "Sort by date", name: "", class: "btn btn-primary" %>
-          <% end %>
-        </div>
-      </div>
       <div class="row justify-content-center">
         <% @pins.each do |pin| %>
           <div class="col-lg-auto">
@@ -93,6 +106,16 @@
                   <p class="card-text"><%= number_with_precision(pin.distance_to(@here), precision: 2) %> km</p>
                   <h5 class="card-title"><%= truncate(pin.name, :length => 15) %></h5>
                   <p class="card-text"><%= truncate(pin.address, :length => 30) %></p>
+
+                  <ul class="p-1">
+                  <% card_tags = pin.tag_list %>
+                  <% card_tags.each do |card_tag| %>
+                  <div class="tags-show-card">
+                  <li><%= card_tag %></li></label>
+                  </div>
+                  <% end %>
+                  </ul>
+
                 </div>
                 <%= link_to '', pin_path(pin.id), class: 'card-link' %>
               </div>

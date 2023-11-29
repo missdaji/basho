@@ -8,6 +8,7 @@
       <%= f.input :use_current_location, as: :boolean, input_html: { class: "toggle", :data => { action: "click->toggle-form#showAddress" } } %>
       <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
       <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
+      <hr>
       <% collection = [
         'utensils',
         'ice-cream',
@@ -31,16 +32,54 @@
           <input type="radio" value=<%= icon %> name="pin[icon]"><%= "<i class='fa-solid fa-#{icon} px-2'></i>".html_safe %>
         </label>
       <% end %>
+      <div class="py-3">
       <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
+      </div>
+      <hr>
+      <div data-controller="color">
       <%= f.association :tags,
                   as: :check_boxes,
+                  collection: current_user.tags,
                   input_html: { class: "tag-selector" },
+                  wrapper_html: { data: {color_target: "tags"} },
                   item_wrapper_class: 'tag-item' %>
-      <%= f.input :tag_list, label: "Add your tags (separated by a coma)" %>
-      <div class="d-flex justify-content-between px-5">
+                  <!-- Button trigger modal -->
+        <div class="row justify-content-center p-3">
+        <div class="row justify-content-center px-5">
+          <button type="button" class="btn btn-primary-tag" data-toggle="modal" data-target="#createtag">New tag</button>
+        </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="createtag" tabindex="-1" role="dialog" aria-labelledby="createtag" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="createtag">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= f.input :tag_list, label: "Add your tag", input_html: { data: {color_target: "name"}, value: "" } %>
+                <%# <label for="favcolor">Select your color </label>
+                <input type="color" id="favcolor" name="favcolor" value="#ff0000"> %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="save" class="btn btn-primary" type="button" name="save-details" data-toggle="modal" data-target="#myModalList" data-dismiss="modal" data-action="click->color#add">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <hr>
+      <div class="row justify-content-center px-3">
+            <div class="d-flex justify-content-between py-3">
         <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
         <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
       </div>
+      </div>
+      <hr>
       <%= f.input :comments %>
       <%= f.input :photo, as: :file %>
       <div class="row justify-content-center p-3">
