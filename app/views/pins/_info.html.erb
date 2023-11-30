@@ -1,8 +1,8 @@
 <div>
   <div class="popup-photo">
     <img src="<%= pin.photo.attached? ? cl_image_path(pin.photo.key) : "https://res.cloudinary.com/dcqlc61be/image/upload/v1701220410/basho-placeholder_pewcwm.jpg"%>" style="object-fit: cover; width: 100vh;">
-    <div class="popup-icon">
-      <i class='fa-solid fa-<%= pin.icon %> popup-icon2'></i>
+    <div class="popup-icon" style="border-color: <%= Pin::ICONS[pin.icon] %>; background-color: <%= Pin::ICONS[pin.icon] %>;">
+      <i class='fa-solid fa-<%= pin.icon %> popup-icon2' style="background-color: <%= Pin::ICONS[pin.icon] %>;"></i>
     </div>
   </div>
   <div class="bg-white p-4">
