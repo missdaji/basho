@@ -73,8 +73,7 @@
                   include_hidden: false do |b| %>
                   <%# <div class="d-flex justify-content-start"> %>
                   <p class="m-0"><%= b.label class:"tags-show-index" do %>
-                    <span class="me-3"><%= current_user.tags.pluck(:name).count(b.text) %></span><%= b.check_box + b.text %>
-                    <%#= current_user.all_tags.where(name: b.text).count %>
+                    <span class="me-3"><%= current_user.all_tags.where(name: "#{b.text}").count %></span><%= b.check_box + b.text %>
                     <%end%></p>
                   <%# </div> %>
                   <% end %>

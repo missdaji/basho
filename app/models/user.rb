@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :pins
   has_many :tags, -> { distinct }, through: :pins
+  has_many :all_tags, through: :pins, source: :tags
   has_one_attached :avatar
 
   devise :database_authenticatable, :registerable,
