@@ -70,9 +70,10 @@
         </div>
       </div>
       <hr class="mt-0">
-      <div class="d-flex justify-content-center star-rating pb-3">
+      <div class="d-flex justify-content-center star-rating pb-5">
+        <input class="d-none" type="radio" name="pin[rating]" value="0" checked />
         <% 5.times do |i| %>
-          <input type="radio" name="pin[rating]" value="<%= i + 1 %>" <%= "checked" if i == 2 %>/>
+          <input type="radio" name="pin[rating]" value="<%= i + 1 %>"/>
         <% end %>
       </div>
       <%= f.input :comments %>
