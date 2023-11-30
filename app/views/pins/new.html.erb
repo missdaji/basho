@@ -25,7 +25,12 @@
       <div class="py-2">
       </div>
       <div class="py-3">
-        <%= f.input :rating, collection: [1, 2, 3, 4, 5], as: :radio_buttons, value: "i + 1", input_html: { class: "star-rating" }, item_wrapper_class: 'star-rating' %>
+        <div class="d-flex justify-content-center star-rating pb-3">
+          <input class="d-none" type="radio" name="pin[rating]" value="0" checked />
+          <% 5.times do |i| %>
+            <input type="radio" name="pin[rating]" value="<%= i + 1 %>"/>
+          <% end %>
+        </div>
       </div>
       <hr>
       <div data-controller="color">
