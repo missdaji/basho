@@ -5,11 +5,12 @@
     <%= simple_form_for(@pin) do |f| %>
       <%= f.input :name %>
       <%= f.input :address, input_html: { id: "showAddress"} %>
+      <%= f.input :longitude, as: "hidden" %>
+      <%= f.input :latitude, as: "hidden" %>
       <%= f.input :use_current_location, as: :boolean, input_html: { class: "toggle", :data => { action: "click->toggle-form#showAddress" } } %>
       <%= f.input :lat, as: "hidden", input_html:{value: params[:lat]} %>
       <%= f.input :lon, as: "hidden", input_html:{value: params[:lon]} %>
       <hr>
-      <br>
       <p>Icon</p>
       <% Pin::ICONS.each do |icon, color| %>
         <label class="icon_checkbox">
@@ -20,24 +21,19 @@
           </span>
         </label>
       <% end %>
-      <div class="py-2">
-      </div>
-      <div class="py-3">
-      <%= f.input :rating, collection: [1, 2, 3, 4, 5], as: :radio_buttons, item_wrapper_class: 'inline', input_html: { class: "" } %>
-      </div>
       <hr>
       <div data-controller="color">
-      <%= f.association :tags,
+        <%= f.association :tags,
                   as: :check_boxes,
                   collection: current_user.tags,
                   input_html: { class: "tag-selector" },
                   wrapper_html: { data: {color_target: "tags"} },
                   item_wrapper_class: 'tag-item' %>
-                  <!-- Button trigger modal -->
-        <div class="row justify-content-center p-2">
+        <!-- Button trigger modal -->
+        <div class="row justify-content-center">
           <div class="col-12 col-lg-6">
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-primary-tag" data-toggle="modal" data-target="#createtag">New tag</button>
+              <button type="button" class="btn btn-primary-tag" style="background-color: #443fa6ff;" data-toggle="modal" data-target="#createtag"><i class="fa-solid fa-plus"></i></button>
             </div>
           </div>
         </div>
@@ -63,17 +59,22 @@
             </div>
           </div>
         </div>
-        </div>
-        <hr>
+      </div>
+      <hr>
       <div class="row justify-content-center">
-        <div class="col-11 col-lg-6">
-          <div class="d-flex justify-content-between py-3 pr-3">
-        <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
-        <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
+        <div class="col-12 col-lg-6">
+          <div class="d-flex justify-content-between align-items-center pr-3">
+            <%= f.input :visited, as: :boolean, input_html: { class: "tag-selector-new" } %>
+            <%= f.input :private, as: :boolean, input_html: { class: "tag-selector-new" } %>
           </div>
         </div>
       </div>
-      <hr>
+      <hr class="mt-0">
+      <div class="d-flex justify-content-center star-rating pb-3">
+        <% 5.times do |i| %>
+          <input type="radio" name="pin[rating]" value="<%= i + 1 %>" <%= "checked" if i == 2 %>/>
+        <% end %>
+      </div>
       <%= f.input :comments %>
       <%= f.input :photo, as: :file %>
       <div class="row justify-content-center p-3">
