@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   get '/search', to: "pages#search"
+  get '/hidden_page', to: "pages#hidden_page"
 
   # Defines the root path route ("/")
   # root "posts#index"

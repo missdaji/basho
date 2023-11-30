@@ -4,6 +4,9 @@ class PagesController < ApplicationController
   def home
   end
 
+  def hidden_page
+  end
+
   def search
     if params[:query]
       query = params[:query]
