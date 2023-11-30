@@ -133,15 +133,15 @@
   font-size: 1rem;
   border-radius: 50rem;
   padding: 0.1rem 0.5rem;
-  background-color: #FF0B67;
+  background-color: $persian-blue;
   opacity: 0.6;
   color: white;
-  border: 1px solid #FF0B67;
+  border: 1px solid $persian-blue;
   margin-right: 0.4rem;
 
-  &:has(input:checked) {
-    background-color: #FF0B67;
-    border: 1px solid #FF0B67;
+  &:has(input:checked){
+    background-color: $persian-blue;
+    border: 1px solid $persian-blue;
     opacity: 1;
   }
 
