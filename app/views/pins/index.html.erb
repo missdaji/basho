@@ -9,129 +9,124 @@
     <% end %>
   </div>
   <%# END MAP/LIST TOGGLE BUTTON %>
-
   <div class="filters-map fixed-top">
     <div class="d-flex justify-content-between mt-3 ms-0">
       <button class="btn-filters" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
         <i class="fa-solid fa-filter" style="color: #ffffff;"></i>
       </button>
       <%# <div class="btn-sort list-container mx-2"> %>
-        <%# <%= link_to pins_path_with_params(view: 'list'), data: {"controller": "geolocate"} do  %>
-          <%# <i class="fa-solid fa-location-crosshairs" style="color: #ffffff;"></i> %>
+      <%# <%= link_to pins_path_with_params(view: 'list'), data: {"controller": "geolocate"} do  %>
+        <%# <i class="fa-solid fa-location-crosshairs" style="color: #ffffff;"></i> %>
         <%# <% end %>
-      <%# </div> %>
         <%# </div> %>
-    </div>
-
-  <div data-controller="filters" class="filters-map fixed-top">
-<%# FILTER BUTTON %>
-    <div class="d-flex justify-content-between list-container mt-3">
-      <button class="btn-filters" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-        <i class="fa-solid fa-filter" style="color: #ffffff;"></i>
-      </button>
-      <div class="btn-sort list-container mx-2">
-        <%= link_to pins_path_with_params(view: 'list'), data: {"controller": "geolocate"} do %>
-          <i class="fa-solid fa-location-crosshairs" style="color: #ffffff;"></i>
-        <% end %>
+        <%# </div> %>
       </div>
-    </div>
-<%# END FILTER BUTTON %>
-
-<%# OFF-CANVAS FILTER SIDEBAR %>
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-      <div class="offcanvas-header">
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <div>
-<%# FILTERS %>
-          <div class="" data-filters-target="filtersCard">
-      <div class="px-2">
-        <div class="d-flex justify-content-center gap-3">
-          <div>
-            <%= link_to pins_path_with_params(visited: 1), data: {"controller": "geolocate"} do  %>
-              <%= button_tag "Visited", class: "btn btn-visited" %>
-            <% end %>
-          </div>
-          <div>
-            <%= link_to pins_path_with_params(visited: 0), data: {"controller": "geolocate"} do  %>
-              <%= button_tag "Not visited", class: "btn btn-visited" %>
+      <div data-controller="filters" class="filters-map fixed-top">
+        <%# FILTER BUTTON %>
+        <div class="d-flex justify-content-between list-container mt-3">
+          <button class="btn-filters" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <i class="fa-solid fa-filter" style="color: #ffffff;"></i>
+          </button>
+          <div class="btn-sort list-container mx-2">
+            <%= link_to pins_path_with_params(view: 'list'), data: {"controller": "geolocate"} do %>
+              <i class="fa-solid fa-location-crosshairs" style="color: #ffffff;"></i>
             <% end %>
           </div>
         </div>
-        <div class="my-2">
-        <%= form_with url: pins_path, method: :get do |f| %>
-          <%= f.text_field :query,
+        <%# END FILTER BUTTON %>
+        <%# OFF-CANVAS FILTER SIDEBAR %>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+          <div class="offcanvas-header">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div>
+              <%# FILTERS %>
+              <div class="" data-filters-target="filtersCard">
+                <div class="px-2">
+                  <div class="d-flex justify-content-center gap-3">
+                    <div>
+                      <%= link_to pins_path_with_params(visited: 1), data: {"controller": "geolocate"} do  %>
+                        <%= button_tag "Visited", class: "btn btn-visited" %>
+                      <% end %>
+                    </div>
+                    <div>
+                      <%= link_to pins_path_with_params(visited: 0), data: {"controller": "geolocate"} do  %>
+                        <%= button_tag "Not visited", class: "btn btn-visited" %>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="my-2">
+                    <%= form_with url: pins_path, method: :get, html: { data: { turbo: 'false' } } do |f| %>
+                      <%= f.text_field :query,
             # params[:query],
             class: "form-control my-3",
             placeholder: "Search" %>
-          <%= f.collection_check_boxes :tags,
+                      <%= f.collection_check_boxes :tags,
                   current_user.tags.order(:name),
                   :name,
                   :name,
                   include_hidden: false do |b| %>
-                  <%# <div class="d-flex justify-content-start"> %>
-                  <p class="m-0"><%= b.label class:"tags-show-index" do %>
-                    <span class="me-3"><%= current_user.all_tags.where(name: "#{b.text}").count %></span><%= b.check_box + b.text %>
-                    <%end%></p>
-                  <%# </div> %>
+                        <%# <div class="d-flex justify-content-start"> %>
+                        <p class="m-0"><%= b.label class:"tags-show-index" do %>
+                            <span class="me-3"><%= current_user.all_tags.where(name: "#{b.text}").count %></span><%= b.check_box + b.text %>
+                          <%end%></p>
+                        <%# </div> %>
+                      <% end %>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <%= f.submit "Search", class: "btn btn-primary" %>
+                      <%= f.submit "X Reset", class: "btn btn-secondary" %>
+                      <%#= submit_tag " Search ", name: "", class: "btn btn-primary" %>
+                      <%#= submit_tag " X Reset ", name: "", class: "btn btn-secondary" %>
+                    </div>
                   <% end %>
-                  </div>
-          <div class="d-flex justify-content-between">
-          <%= f.submit "Search", class: "btn btn-primary" %>
-          <%#= submit_tag " Search ", name: "", class: "btn btn-primary" %>
-          <%= submit_tag " X Reset ", name: "", class: "btn btn-secondary" %>
+                </div>
+              </div>
+              <%# END FILTERS %>
+            </div>
           </div>
-        <% end %>
-
-      </div>
-    </div>
-<%# END FILTERS %>
         </div>
       </div>
-    </div>
-  </div>
-<%# END OFF-CANVAS FILTER SIDEBAR %>
-
-<%# SORTING %>
-    <div class="d-flex justify-content-end mx-2">
-      <div class="d-flex my-auto align-items-end pt-2 gap-2">
-        <p class="my-auto list-container">Sort by:</p>
-        <div class="btn-sort list-container" >
-          <%= link_to pins_path_with_params(sort_by: :name), data: {"controller": "geolocate"} do  %>
-            <i class="fa-solid fa-arrow-down-a-z" style="color: #ffffff;"></i>
-          <% end %>
-        </div>
-        <div class="btn-sort list-container" >
-          <%= link_to pins_path_with_params(sort_by: :date), data: {"controller": "geolocate"} do  %>
-            <i class="fa-solid fa-calendar-plus" style="color: #ffffff;"></i>
-          <% end %>
-        </div>
-        <div class="btn-sort list-container" >
-          <%= link_to pins_path_with_params(sort_by: :distance), data: {"controller": "geolocate"} do  %>
-            <i class="fa-solid fa-compass-drafting" style="color: #ffffff;"></i>
-          <% end %>
+      <%# END OFF-CANVAS FILTER SIDEBAR %>
+      <%# SORTING %>
+      <div class="d-flex justify-content-end mx-2">
+        <div class="d-flex my-auto align-items-end pt-2 gap-2">
+          <p class="my-auto list-container">Sort by:</p>
+          <div class="btn-sort list-container" >
+            <%= link_to pins_path_with_params(sort_by: :name), data: {"controller": "geolocate"} do  %>
+              <i class="fa-solid fa-arrow-down-a-z" style="color: #ffffff;"></i>
+            <% end %>
+          </div>
+          <div class="btn-sort list-container" >
+            <%= link_to pins_path_with_params(sort_by: :date), data: {"controller": "geolocate"} do  %>
+              <i class="fa-solid fa-calendar-plus" style="color: #ffffff;"></i>
+            <% end %>
+          </div>
+          <div class="btn-sort list-container" >
+            <%= link_to pins_path_with_params(sort_by: :distance), data: {"controller": "geolocate"} do  %>
+              <i class="fa-solid fa-compass-drafting" style="color: #ffffff;"></i>
+            <% end %>
+          </div>
         </div>
       </div>
+      <%# END SORTING %>
     </div>
-<%# END SORTING %>
-
-  </div>
-  <div
+    <div
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-    <div data-map-target="mapbox" class="map-container position-fixed" style="width: 100%; height: 93%;"
+      <div data-map-target="mapbox" class="map-container position-fixed" style="width: 100%; height: 93%;"
 
     ></div>
-    <div data-map-target="plus">
-      <%# link_to new_pin_path(:lat => params[:lat], :lon => params[:lon]), data: {"controller": "get-position"} do %>
-        <%= link_to search_path do %>
-          <button class="btn btn-primary circle-button d-flex" style="font-size: 50px;">
-            +
-          </button>
-        <% end %>
+      <div data-map-target="plus">
+        <%# link_to new_pin_path(:lat => params[:lat], :lon => params[:lon]), data: {"controller": "get-position"} do %>
+          <%= link_to search_path do %>
+            <button class="btn btn-primary circle-button d-flex" style="font-size: 50px;">
+              +
+            </button>
+          <% end %>
+        </div>
       </div>
+      <%= render "list" %>
     </div>
-    <%= render "list" %>
-  </div>
