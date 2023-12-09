@@ -1,11 +1,11 @@
 // Specific CSS for your home-page
-body {
-background-color: $persian-blue;
+#homepage-background {
+  width: 100%;
+  background-color: $persian-blue;
+  background-image: image_url("background.jpg");
 }
 
 .homepage {
-  // background-color: $persian-blue;
-  background-image: image_url("background.jpg");
   margin-top: -8px;
   padding: 0;
   margin-bottom: -15px;
