@@ -5,7 +5,7 @@
         <img src="<%= @pin.photo.attached? ? cl_image_path(@pin.photo.key) : "https://res.cloudinary.com/dcqlc61be/image/upload/v1701220410/basho-placeholder_pewcwm.jpg" %>" width="100%" height="300" class="object-fit-cover" >
       </div>
       <br>
-      <div class="px-4">
+      <div class="px-4 col-12 col-md-8 col-xl-6 mx-auto">
         <div class="d-flex px-1">
           <div class="show-icon pr-4" style="color: <%= Pin::ICONS[@pin.icon] %>;">
             <%= "<i class='fa-solid fa-#{@pin.icon}'></i>".html_safe %>
