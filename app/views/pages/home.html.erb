@@ -1,17 +1,19 @@
-<div class="container-fluid homepage mx-auto">
-  <div>
-    <%= image_tag "basho-logo.png", :class => "homepage-content" %>
-  </div>
-  <div>
-  <h2>A map of your best memories, past and yet to come</h2>
-  </div>
-  <div>
-    <%= image_tag "basho-image2.png", :class => "homepage-content" %>
-  </div>
+<div id="homepage-background">
+  <div class="container-sm homepage mx-auto">
+    <div>
+      <%= image_tag "basho-logo.png", :class => "homepage-content" %>
+    </div>
+    <div>
+    <h2>A map of your best memories, past and yet to come</h2>
+    </div>
+    <div>
+      <%= image_tag "basho-image2.png", :class => "homepage-content" %>
+    </div>
 
-  <div class="start-button">
-    <h2><%= link_to "Start", pins_path, :id => "start" %></h2>
+    <div class="start-button">
+      <h2><%= link_to "Start", pins_path, :id => "start" %></h2>
+    </div>
+      <p class="description">Curate your very own map of Tokyo with the places that matter to you. Tag, filter, sort and customize your pins just the way you want it.</p>
+      <p>© 2023 Basho, Inc. All rights reserved.</p>
   </div>
-    <p class="description">Curate your very own map of Tokyo with the places that matter to you. Tag, filter, sort and customize your pins just the way you want it.</p>
-    <p>© 2023 Basho, Inc. All rights reserved.</p>
 </div>
